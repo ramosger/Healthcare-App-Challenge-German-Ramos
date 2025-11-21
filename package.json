@@ -107,7 +107,7 @@
     "storybook": "^10.0.7",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.46.4",
-    "vite": "^7.2.2",
+    "vite": "^7.2.4",
     "vite-bundle-analyzer": "^1.2.3",
     "vitest": "^4.0.8",
     "web-vitals": "^5.1.0"
