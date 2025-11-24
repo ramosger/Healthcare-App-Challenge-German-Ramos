@@ -20,6 +20,7 @@
   "form": {
     "email": "Email",
     "password": "Password",
+    "fullName": "Full name",
     "name": "Name",
     "confirmPassword": "Confirm Password",
     "passwordMustInclude": "Password must include",
@@ -32,6 +33,13 @@
       "passwordTooWeak": "Password is too weak.",
       "containsLetter": "{field} must contain at least one letter."
     }
+  },
+  "register": {
+    "createAccount": "Create account",
+    "subtitle": "Enter your information to create a new account",
+    "withAccount": "<Link>Already have an account? Log in</Link>",
+    "error": "Not able to log in",
+    "success": "Logged in successfully"
   },
   "login": {
     "forgotYourPassword": "Forgot your password?",

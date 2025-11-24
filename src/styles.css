@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
 
 @plugin "tailwindcss-animate";
 
@@ -182,6 +183,9 @@ code {
   --yellow-800: #854d0e;
   --yellow-900: #713f12;
   --yellow-950: #422006;
+
+  --auth-bg-1: #fafafb;
+  --auth-bg-2: #e7e8eb;
 }
 
 @theme inline {
@@ -343,6 +347,7 @@ code {
   --color-text-danger-tertiary: var(--red-500);
 
   --color-text-default-default: var(--gray-900);
+  --color-text-default: var(--color-text-default-default);
   --color-text-default-secondary: var(--gray-500);
   --color-text-default-tertiary: var(--gray-400);
 
@@ -379,4 +384,8 @@ code {
   --color-text-warning-on-warning-tertiary: var(--orange-800);
   --color-text-warning-secondary: var(--orange-600);
   --color-text-warning-tertiary: var(--orange-500);
+
+  --background-image-auth: linear-gradient(180deg, var(--auth-bg-1), var(--auth-bg-2));
+
+  --color-border-default: var(--color-border-default-default);
 }
