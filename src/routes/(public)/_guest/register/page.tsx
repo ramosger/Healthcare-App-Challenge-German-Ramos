@@ -4,10 +4,8 @@ import { RegisterForm } from "./-components";
 
 const RegisterPage = () => {
   return (
-    <div className="flex flex-1 flex-col items-center justify-center bg-auth">
-      <div className="w-96 rounded-2xl p-3 shadow">
-        <RegisterForm />
-      </div>
+    <div className="flex min-h-screen flex-col items-center bg-auth px-6 pt-16 pb-10 lg:justify-center">
+      <RegisterForm />
     </div>
   );
 };
