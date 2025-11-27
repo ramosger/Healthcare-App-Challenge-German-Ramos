@@ -1,42 +1,36 @@
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Link, useNavigate, useRouter, useSearch } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 
 import { Button, ErrorMessage, Input, Label, PasswordInput, toast } from "@/components";
 import { Trans, useTranslation } from "@/i18n";
-import { getLoginRequestSchema, type LoginRequest, useLoginMutation } from "@/services";
-import { setAuthStoreToken } from "@/stores";
+import { getRegisterRequestSchema, type RegisterRequest, useRegisterMutation } from "@/services";
 import { handleAxiosFieldErrors } from "@/utils";
 
 export const RegisterForm = () => {
   const { t } = useTranslation();
 
-  const loginMutation = useLoginMutation();
-
-  const router = useRouter();
-  const search = useSearch({ from: "/(public)/_guest/register/" });
+  const registerMutation = useRegisterMutation();
   const navigate = useNavigate();
 
   const {
-    formState: { errors },
+    formState: { errors, isValid },
     handleSubmit,
     register,
     setError,
   } = useForm({
     mode: "onTouched",
-    resolver: zodResolver(getLoginRequestSchema()),
+    resolver: zodResolver(getRegisterRequestSchema()),
   });
 
-  const onSubmit: SubmitHandler<LoginRequest> = (data) => {
-    loginMutation.mutate(data, {
-      onSuccess: async ({ data: { authToken } }) => {
-        toast.success(t("login.success"));
-        setAuthStoreToken(authToken);
-        await router.invalidate();
-        await navigate({ to: search.redirect || "/" });
+  const onSubmit: SubmitHandler<RegisterRequest> = (data) => {
+    registerMutation.mutate(data, {
+      onSuccess: async () => {
+        toast.success(t("register.success"));
+        await navigate({ to: "/login" });
       },
       onError: (error) => {
-        handleAxiosFieldErrors<LoginRequest>(error, setError, t("login.error"));
+        handleAxiosFieldErrors<RegisterRequest>(error, setError, t("register.error"));
       },
     });
   };
@@ -59,12 +53,12 @@ export const RegisterForm = () => {
           </Label>
 
           <Input
-            {...register("email")}
+            {...register("fullName")}
             className="h-11 rounded-md border-border-default bg-background-default-default text-sm"
             placeholder={t("form.fullName")}
           />
 
-          <ErrorMessage errorMessage={errors?.email?.message} />
+          <ErrorMessage errorMessage={errors?.fullName?.message} />
         </div>
 
         <div className="flex flex-col gap-2">
@@ -101,16 +95,17 @@ export const RegisterForm = () => {
           </Label>
 
           <PasswordInput
-            {...register("password")}
+            {...register("confirmPassword")}
             className="h-11 rounded-md border-border-default bg-background-default-default text-sm"
             placeholder={t("form.confirmPassword")}
           />
 
-          <ErrorMessage errorMessage={errors?.password?.message} />
+          <ErrorMessage errorMessage={errors?.confirmPassword?.message} />
         </div>
 
         <Button
           className="text-md h-10 w-full rounded-md bg-background-brand-default px-3 py-2 font-medium text-text-neutral-on-neutral"
+          disabled={!isValid}
           type="submit"
         >
           {t("register.createAccount")}

@@ -16,3 +16,30 @@ export const getLoginRequestSchema = () => {
 export const loginResponseSchema = z.object({
   authToken: z.string(),
 });
+
+export const getRegisterRequestSchema = () => {
+  return z
+    .object({
+      fullName: z.string().min(4, {
+        message: i18n.t("form.errors.required", { field: i18n.t("form.fullName") }),
+      }),
+      email: z.email({
+        message: i18n.t("form.errors.invalidField", { field: i18n.t("form.email") }),
+      }),
+      password: z.string().min(6, {
+        message: i18n.t("form.errors.minLength", { field: i18n.t("form.password"), length: 6 }),
+      }),
+      confirmPassword: z.string().min(6, {
+        message: i18n.t("form.errors.minLength", { field: i18n.t("form.password"), length: 6 }),
+      }),
+    })
+    .superRefine(({ confirmPassword, password }, ctx) => {
+      if (password !== confirmPassword) {
+        ctx.addIssue({
+          code: "custom",
+          message: i18n.t("form.errors.passwordMismatch"),
+          path: ["confirmPassword"],
+        });
+      }
+    });
+};
