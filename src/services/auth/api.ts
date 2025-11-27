@@ -9,7 +9,7 @@ export const login = ({ email, password }: LoginRequest) => {
 };
 
 export const register = ({ confirmPassword, email, fullName, password }: RegisterRequest) => {
-  return publicApi.post<void>("auth/signup", {
+  return publicApi.post<void>("/auth/signup", {
     name: fullName,
     email,
     password,
