@@ -54,7 +54,9 @@ export const RegisterForm = () => {
 
           <Input
             {...register("fullName")}
-            className="h-11 rounded-md border-border-default bg-background-default-default text-sm"
+            className={`h-11 rounded-md bg-background-default-default text-sm ${
+              errors.fullName ? "border-border-danger-tertiary" : "border-border-default"
+            }`}
             placeholder={t("form.fullName")}
           />
 
@@ -68,7 +70,9 @@ export const RegisterForm = () => {
 
           <Input
             {...register("email")}
-            className="h-11 rounded-md border-border-default bg-background-default-default text-sm"
+            className={`h-11 rounded-md bg-background-default-default text-sm ${
+              errors.fullName ? "border-border-danger-tertiary" : "border-border-default"
+            }`}
             placeholder={t("form.email")}
           />
 
@@ -82,7 +86,9 @@ export const RegisterForm = () => {
 
           <PasswordInput
             {...register("password")}
-            className="h-11 rounded-md border-border-default bg-background-default-default text-sm"
+            className={`h-11 rounded-md bg-background-default-default text-sm ${
+              errors.fullName ? "border-border-danger-tertiary" : "border-border-default"
+            }`}
             placeholder={t("form.password")}
           />
 
@@ -96,7 +102,9 @@ export const RegisterForm = () => {
 
           <PasswordInput
             {...register("confirmPassword")}
-            className="h-11 rounded-md border-border-default bg-background-default-default text-sm"
+            className={`h-11 rounded-md bg-background-default-default text-sm ${
+              errors.fullName ? "border-border-danger-tertiary" : "border-border-default"
+            }`}
             placeholder={t("form.confirmPassword")}
           />
 
