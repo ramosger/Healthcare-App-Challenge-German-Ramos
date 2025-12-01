@@ -27,11 +27,12 @@
     "errors": {
       "required": "{field} is required.",
       "invalidField": "Please enter a valid {field}.",
-      "minLength": "{field} should contain at least {length} characters.",
+      "minLength": "{field} must be at least {length} characters long",
       "containsNumber": "{field} must contain at least one number.",
-      "passwordMismatch": "Passwords don't match.",
+      "passwordMismatch": "Passwords do not match.",
       "passwordTooWeak": "Password is too weak.",
-      "containsLetter": "{field} must contain at least one letter."
+      "containsLetter": "{field} must contain at least one letter.",
+      "confirmPasswordRequired": "Please confirm your password."
     }
   },
   "register": {
