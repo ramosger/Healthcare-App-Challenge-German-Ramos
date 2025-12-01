@@ -48,14 +48,16 @@ export const RegisterForm = () => {
 
       <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-2">
-          <Label className="text-sm font-normal text-text-default" htmlFor="fullName">
+          <Label className="text-sm font-normal" htmlFor="fullName">
             {t("form.fullName")}
           </Label>
 
           <Input
             {...register("fullName")}
             className={`h-11 rounded-md bg-background-default-default text-sm ${
-              errors.fullName ? "border-border-danger-tertiary" : "border-border-default"
+              errors.fullName
+                ? "border-border-danger-tertiary text-icon-danger-default"
+                : "border-border-default text-text-default"
             }`}
             placeholder={t("form.fullName")}
           />
@@ -64,14 +66,16 @@ export const RegisterForm = () => {
         </div>
 
         <div className="flex flex-col gap-2">
-          <Label className="text-sm font-normal text-text-default" htmlFor="email">
+          <Label className="text-sm font-normal" htmlFor="email">
             {t("form.email")}
           </Label>
 
           <Input
             {...register("email")}
             className={`h-11 rounded-md bg-background-default-default text-sm ${
-              errors.fullName ? "border-border-danger-tertiary" : "border-border-default"
+              errors.email
+                ? "border-border-danger-tertiary text-icon-danger-default"
+                : "border-border-default text-text-default"
             }`}
             placeholder={t("form.email")}
           />
@@ -80,14 +84,16 @@ export const RegisterForm = () => {
         </div>
 
         <div className="flex flex-col gap-2">
-          <Label className="text-sm font-normal text-text-default" htmlFor="password">
+          <Label className="text-sm font-normal" htmlFor="password">
             {t("form.password")}
           </Label>
 
           <PasswordInput
             {...register("password")}
             className={`h-11 rounded-md bg-background-default-default text-sm ${
-              errors.fullName ? "border-border-danger-tertiary" : "border-border-default"
+              errors.password
+                ? "border-border-danger-tertiary text-icon-danger-default"
+                : "border-border-default text-text-default"
             }`}
             placeholder={t("form.password")}
           />
@@ -96,14 +102,16 @@ export const RegisterForm = () => {
         </div>
 
         <div className="flex flex-col gap-2">
-          <Label className="text-sm font-normal text-text-default" htmlFor="password">
+          <Label className="text-sm font-normal" htmlFor="password">
             {t("form.confirmPassword")}
           </Label>
 
           <PasswordInput
             {...register("confirmPassword")}
             className={`h-11 rounded-md bg-background-default-default text-sm ${
-              errors.fullName ? "border-border-danger-tertiary" : "border-border-default"
+              errors.confirmPassword
+                ? "border-border-danger-tertiary text-icon-danger-default"
+                : "border-border-default text-text-default"
             }`}
             placeholder={t("form.confirmPassword")}
           />
