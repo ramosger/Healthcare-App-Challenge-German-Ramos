@@ -40,7 +40,9 @@
     "subtitle": "Enter your information to create a new account",
     "withAccount": "<Link>Already have an account? Log in</Link>",
     "error": "Not able to sign up",
-    "success": "Logged in successfully"
+    "success": "Your account was successfully created.",
+    "allSet": "You're all set!",
+    "redirectToLogin": "Go to login"
   },
   "login": {
     "forgotYourPassword": "Forgot your password?",
