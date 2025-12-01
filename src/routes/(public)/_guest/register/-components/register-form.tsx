@@ -121,9 +121,33 @@ export const RegisterForm = () => {
 
         <Button
           className="text-md h-10 w-full rounded-md bg-background-brand-default px-3 py-2 font-medium text-text-neutral-on-neutral"
-          disabled={!isValid}
+          disabled={!isValid || registerMutation.isPending}
           type="submit"
         >
+          {registerMutation.isPending ? (
+            <svg
+              aria-hidden="true"
+              className="h-4 w-4 animate-spin text-text-default-secondary"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="3"
+              />
+              <path
+                className="opacity-75"
+                d="M22 12a10 10 0 00-10-10"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeWidth="3"
+              />
+            </svg>
+          ) : null}
           {t("register.createAccount")}
         </Button>
 
