@@ -2,6 +2,7 @@ import { type SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Icon } from "@iconify/react";
 import { Link } from "@tanstack/react-router";
+import { twMerge } from "tailwind-merge";
 
 import { Button, ErrorMessage, Input, Label, PasswordInput } from "@/components";
 import { Trans, useTranslation } from "@/i18n";
@@ -57,11 +58,12 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
 
           <Input
             {...register("fullName")}
-            className={`h-11 rounded-md bg-background-default-default text-sm ${
+            className={twMerge(
+              "h-11 rounded-md bg-background-default-default text-sm placeholder:text-text-default",
               errors.fullName
                 ? "border-border-danger-tertiary text-icon-danger-default focus:border-border-danger-tertiary focus:ring-0 focus-visible:border-border-danger-tertiary focus-visible:ring-0"
-                : "border-border-default text-text-default"
-            }`}
+                : "border-border-default text-text-default",
+            )}
             placeholder={t("form.fullName")}
           />
 
@@ -75,11 +77,12 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
 
           <Input
             {...register("email")}
-            className={`h-11 rounded-md bg-background-default-default text-sm ${
-              errors.email
+            className={twMerge(
+              "h-11 rounded-md bg-background-default-default text-sm placeholder:text-text-default",
+              errors.fullName
                 ? "border-border-danger-tertiary text-icon-danger-default focus:border-border-danger-tertiary focus:ring-0 focus-visible:border-border-danger-tertiary focus-visible:ring-0"
-                : "border-border-default text-text-default"
-            }`}
+                : "border-border-default text-text-default",
+            )}
             placeholder={t("form.email")}
           />
 
@@ -93,11 +96,12 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
 
           <PasswordInput
             {...register("password")}
-            className={`h-11 rounded-md bg-background-default-default text-sm ${
-              errors.password
+            className={twMerge(
+              "h-11 rounded-md bg-background-default-default text-sm placeholder:text-text-default",
+              errors.fullName
                 ? "border-border-danger-tertiary text-icon-danger-default focus:border-border-danger-tertiary focus:ring-0 focus-visible:border-border-danger-tertiary focus-visible:ring-0"
-                : "border-border-default text-text-default"
-            }`}
+                : "border-border-default text-text-default",
+            )}
             placeholder={t("form.password")}
           />
 
@@ -111,11 +115,12 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
 
           <PasswordInput
             {...register("confirmPassword")}
-            className={`h-11 rounded-md bg-background-default-default text-sm ${
-              errors.confirmPassword
+            className={twMerge(
+              "h-11 rounded-md bg-background-default-default text-sm placeholder:text-text-default",
+              errors.fullName
                 ? "border-border-danger-tertiary text-icon-danger-default focus:border-border-danger-tertiary focus:ring-0 focus-visible:border-border-danger-tertiary focus-visible:ring-0"
-                : "border-border-default text-text-default"
-            }`}
+                : "border-border-default text-text-default",
+            )}
             placeholder={t("form.confirmPassword")}
           />
 
