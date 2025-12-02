@@ -13,10 +13,9 @@ export const RegisterSuccess = () => {
       <div className="flex flex-1 flex-col items-center justify-center gap-6">
         <div className="check-circle flex size-20 items-center justify-center rounded-full">
           <Icon
-            className="duration-500 animate-in fade-in-0 slide-in-from-left-4"
+            className="text-text-success-tertiary duration-500 animate-in fade-in-0 slide-in-from-left-4"
             height="1024"
             icon="ep:success-filled"
-            style={{ color: "#22C55E" }}
             width="1024"
           />
         </div>
