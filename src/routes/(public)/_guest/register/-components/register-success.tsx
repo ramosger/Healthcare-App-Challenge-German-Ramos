@@ -12,7 +12,13 @@ export const RegisterSuccess = () => {
     <div className="flex min-h-screen w-full flex-col bg-linear-to-b from-[#E8FFF1] to-[#CFFAE0] px-4 lg:px-0">
       <div className="flex flex-1 flex-col items-center justify-center gap-6">
         <div className="check-circle flex size-20 items-center justify-center rounded-full">
-          <Icon height="1024" icon="ep:success-filled" style={{ color: "#22C55E" }} width="1024" />
+          <Icon
+            className="duration-500 animate-in fade-in-0 slide-in-from-left-4"
+            height="1024"
+            icon="ep:success-filled"
+            style={{ color: "#22C55E" }}
+            width="1024"
+          />
         </div>
 
         <div className="text-center">
