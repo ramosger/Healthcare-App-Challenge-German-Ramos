@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 
-import { RegisterSuccess } from "./-components/register-success";
-import { RegisterForm } from "./-components";
+import { RegisterForm, RegisterSuccess } from "./-components";
 
 const RegisterPage = () => {
   const [isSuccess, setIsSuccess] = useState(false);

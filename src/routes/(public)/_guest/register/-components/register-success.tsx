@@ -9,7 +9,7 @@ export const RegisterSuccess = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="flex min-h-screen w-full flex-col bg-linear-to-b from-[#E8FFF1] to-[#CFFAE0] px-4 lg:px-0">
+    <div className="flex min-h-screen w-full flex-col bg-linear-to-b from-green-50 to-background-success-secondary px-4 lg:px-0">
       <div className="flex flex-1 flex-col items-center justify-center gap-6">
         <div className="check-circle flex size-20 items-center justify-center rounded-full">
           <Icon
