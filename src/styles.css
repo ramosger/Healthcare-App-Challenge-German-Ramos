@@ -182,8 +182,8 @@ code {
   --yellow-900: #713f12;
   --yellow-950: #422006;
 
-  --auth-bg-1: #fafafb;
-  --auth-bg-2: #e7e8eb;
+  --light-white: #fafafb;
+  --silver-gray: #e7e8eb;
 }
 
 @theme inline {
@@ -383,7 +383,7 @@ code {
   --color-text-warning-secondary: var(--orange-600);
   --color-text-warning-tertiary: var(--orange-500);
 
-  --background-image-auth: linear-gradient(180deg, var(--auth-bg-1), var(--auth-bg-2));
+  --background-image-auth: linear-gradient(180deg, var(--light-white), var(--silver-gray));
 
   --color-border-default: var(--color-border-default-default);
 
