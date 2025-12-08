@@ -51,7 +51,7 @@ export const getRegisterRequestSchema = () => {
       confirmPassword: z
         .string()
         .min(1, {
-          message: i18n.t("form.errors.confirmPasswordRequired"),
+          message: i18n.t("form.passwordErrors.confirmPasswordRequired"),
         })
         .min(8, {
           message: i18n.t("form.errors.minLength", {

@@ -29,9 +29,9 @@ export const getUserSchema = () => {
       }),
       password: z
         .string()
-        .refine(hasMinLength, { message: i18n.t("form.errors.passwordTooWeak") })
-        .refine(hasNumber, { message: i18n.t("form.errors.passwordTooWeak") })
-        .refine(hasLetter, { message: i18n.t("form.errors.passwordTooWeak") }),
+        .refine(hasMinLength, { message: i18n.t("form.passwordErrors.passwordTooWeak") })
+        .refine(hasNumber, { message: i18n.t("form.passwordErrors.passwordTooWeak") })
+        .refine(hasLetter, { message: i18n.t("form.passwordErrors.passwordTooWeak") }),
       passwordConfirmation: z.string(),
     })
     .refine(

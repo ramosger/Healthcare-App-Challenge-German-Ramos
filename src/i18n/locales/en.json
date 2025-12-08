@@ -30,16 +30,18 @@
       "minLength": "{field} must be at least {length} characters long",
       "containsNumber": "{field} must contain at least one number.",
       "passwordMismatch": "Passwords do not match.",
+      "containsLetter": "{field} must contain at least one letter."
+    },
+    "passwordErrors": {
       "passwordTooWeak": "Password is too weak.",
-      "containsLetter": "{field} must contain at least one letter.",
       "confirmPasswordRequired": "Please confirm your password."
     }
   },
   "register": {
     "createAccount": "Create account",
     "subtitle": "Enter your information to create a new account",
-    "withAccount": "<Link>Already have an account? Log in</Link>",
-    "error": "Not able to sign up",
+    "withAccount": "<Link>Already have an account? Login</Link>",
+    "signUpFailed": "We couldn’t complete your registration.",
     "success": "Your account was successfully created.",
     "allSet": "You're all set!",
     "redirectToLogin": "Go to login"

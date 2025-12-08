@@ -16,7 +16,7 @@ type RegisterFormProps = {
 export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
   const { t } = useTranslation();
 
-  const registerMutation = useRegisterMutation();
+  const { isPending: isRegisterPending, mutate: registerUser } = useRegisterMutation();
 
   const {
     formState: { errors, isValid },
@@ -29,12 +29,12 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
   });
 
   const onSubmit: SubmitHandler<RegisterRequest> = (data) => {
-    registerMutation.mutate(data, {
+    registerUser(data, {
       onSuccess: async () => {
         onSuccess?.();
       },
       onError: (error) => {
-        handleAxiosFieldErrors<RegisterRequest>(error, setError, t("register.error"));
+        handleAxiosFieldErrors<RegisterRequest>(error, setError, t("register.signUpFailed"));
       },
     });
   };
@@ -129,10 +129,10 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
 
         <Button
           className="text-md flex h-10 w-full items-center justify-center gap-2 rounded-md bg-background-brand-default px-3 py-2 font-medium text-text-neutral-on-neutral"
-          disabled={!isValid || registerMutation.isPending}
+          disabled={!isValid || isRegisterPending}
           type="submit"
         >
-          {registerMutation.isPending ? (
+          {isRegisterPending ? (
             <Icon
               className="size-5 animate-spin text-text-default-secondary"
               icon="eos-icons:loading"
