@@ -126,7 +126,9 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
         </div>
 
         <Button
+          aria-busy={isRegisterPending}
           className="text-md flex h-10 w-full items-center justify-center gap-2 rounded-md bg-background-brand-default px-3 py-2 font-medium text-text-neutral-on-neutral"
+          data-loading={isRegisterPending}
           disabled={isRegisterPending}
           type="submit"
         >
