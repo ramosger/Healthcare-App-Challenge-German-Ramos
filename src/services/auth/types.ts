@@ -4,4 +4,4 @@ import type { getLoginRequestSchema, getRegisterSchema, loginResponseSchema } fr
 
 export type LoginRequest = z.infer<ReturnType<typeof getLoginRequestSchema>>;
 export type LoginResponse = z.infer<typeof loginResponseSchema>;
-export type RegisterRequest = z.infer<ReturnType<typeof getRegisterSchema>>;
+export type RegisterPayload = z.infer<ReturnType<typeof getRegisterSchema>>;

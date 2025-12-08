@@ -1,5 +1,5 @@
 import { publicApi } from "@/config/api";
-import type { LoginRequest, RegisterRequest } from "./types";
+import type { LoginRequest, RegisterPayload } from "./types";
 
 export const login = ({ email, password }: LoginRequest) => {
   return Promise.resolve({
@@ -8,7 +8,7 @@ export const login = ({ email, password }: LoginRequest) => {
   // return publicApi.post<ServiceResponse<LoginResponse>>('auth/login', { email, password });
 };
 
-export const register = ({ email, name, password, passwordConfirmation }: RegisterRequest) => {
+export const register = ({ email, name, password, passwordConfirmation }: RegisterPayload) => {
   return publicApi.post<void>("/auth/signup", {
     name,
     email,
