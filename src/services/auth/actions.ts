@@ -11,13 +11,10 @@ export const useLoginMutation = (props?: UseMutationProps<typeof mutations.login
   });
 };
 
-export const useRegisterMutation = (props?: UseMutationProps<typeof mutations.register>) => {
+export const useRegister = (props?: UseMutationProps<typeof mutations.register>) => {
   return useMutation({
     mutationFn: mutations.register,
-    onError: () => {
-      // eslint-disable-next-line no-console
-      console.log("Error :(");
-    },
+    onError: () => {},
     ...props,
   });
 };

@@ -6,7 +6,7 @@ import { twMerge } from "tailwind-merge";
 
 import { Button, ErrorMessage, Input, Label, PasswordInput } from "@/components";
 import { Trans, useTranslation } from "@/i18n";
-import { getRegisterRequestSchema, type RegisterRequest, useRegisterMutation } from "@/services";
+import { getRegisterRequestSchema, type RegisterRequest, useRegister } from "@/services";
 import { handleAxiosFieldErrors } from "@/utils";
 
 const baseInputClasses =
@@ -21,7 +21,7 @@ export const RegisterForm = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const { isPending: isRegisterPending, mutate: registerUser } = useRegisterMutation();
+  const { isPending: isRegisterPending, mutate: registerUser } = useRegister();
 
   const {
     formState: { errors },
