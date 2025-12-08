@@ -1,11 +1,9 @@
 import { Icon } from "@iconify/react";
-import { useNavigate } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 
-import { Button } from "@/components";
 import { useTranslation } from "@/i18n";
 
 export const RegisterSuccess = () => {
-  const navigate = useNavigate();
   const { t } = useTranslation();
 
   return (
@@ -26,15 +24,12 @@ export const RegisterSuccess = () => {
         </div>
 
         <div className="fixed bottom-10 left-0 flex w-full justify-center px-4 lg:static lg:bottom-auto lg:left-auto lg:px-0 lg:pt-24">
-          <Button
-            className="text-md h-10 w-full max-w-md rounded-md bg-background-brand-default px-3 py-2 font-medium text-text-neutral-on-neutral"
-            onClick={() => {
-              return navigate({ to: "/login" });
-            }}
-            type="button"
+          <Link
+            className="text-md flex h-10 w-full max-w-md items-center justify-center rounded-md bg-background-brand-default px-3 py-2 font-medium text-text-neutral-on-neutral"
+            to="/login"
           >
             {t("register.redirectToLogin")}
-          </Button>
+          </Link>
         </div>
       </div>
     </div>
