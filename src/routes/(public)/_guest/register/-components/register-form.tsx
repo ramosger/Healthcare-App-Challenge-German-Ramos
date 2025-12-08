@@ -39,13 +39,12 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
 
   return (
     <>
-      <div className="pb-6">
+      <div className="flex flex-col gap-2 pb-6">
         <h1 className="text-3xl font-normal tracking-tight text-text-default">
           {t("register.createAccount")}
         </h1>
-        <p className="text-md pt-2 font-normal text-text-default-secondary">
-          {t("register.subtitle")}
-        </p>
+
+        <p className="text-md font-normal text-text-default-secondary">{t("register.subtitle")}</p>
       </div>
 
       <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
