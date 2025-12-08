@@ -20,9 +20,9 @@ export const RegisterSuccess = () => {
           />
         </div>
 
-        <div className="text-center">
+        <div className="flex flex-col gap-2 text-center">
           <h1 className="text-3xl font-medium text-text-default">{t("register.allSet")}</h1>
-          <p className="text-md pt-2 font-normal text-text-default">{t("register.success")}</p>
+          <p className="text-md font-normal text-text-default">{t("register.success")}</p>
         </div>
 
         <div className="fixed bottom-10 left-0 flex w-full justify-center px-4 lg:static lg:bottom-auto lg:left-auto lg:px-0 lg:pt-24">
