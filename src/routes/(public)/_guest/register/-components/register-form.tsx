@@ -30,9 +30,7 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
 
   const onSubmit: SubmitHandler<RegisterRequest> = (data) => {
     registerUser(data, {
-      onSuccess: async () => {
-        onSuccess?.();
-      },
+      onSuccess,
       onError: (error) => {
         handleAxiosFieldErrors<RegisterRequest>(error, setError, t("register.signUpFailed"));
       },
