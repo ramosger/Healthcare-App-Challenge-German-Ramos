@@ -20,7 +20,7 @@ export const loginResponseSchema = z.object({
 export const getRegisterRequestSchema = () => {
   return z
     .object({
-      fullName: z.string().min(4, {
+      name: z.string().min(4, {
         message: i18n.t("form.errors.required", { field: i18n.t("form.fullName") }),
       }),
       email: z

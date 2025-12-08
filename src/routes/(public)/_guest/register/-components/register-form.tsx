@@ -57,20 +57,20 @@ export const RegisterForm = () => {
 
       <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-2">
-          <Label className="text-sm font-normal" htmlFor="fullName">
-            {t("form.fullName")}
+          <Label className="text-sm font-normal" htmlFor="name">
+            {t("form.name")}
           </Label>
 
           <Input
-            {...register("fullName")}
+            {...register("name")}
             className={twMerge(
               baseInputClasses,
-              errors.fullName ? errorInputClasses : normalInputClasses,
+              errors.name ? errorInputClasses : normalInputClasses,
             )}
             placeholder={t("form.fullName")}
           />
 
-          <ErrorMessage errorMessage={errors?.fullName?.message} />
+          <ErrorMessage errorMessage={errors?.name?.message} />
         </div>
 
         <div className="flex flex-col gap-2">
