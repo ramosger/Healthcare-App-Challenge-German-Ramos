@@ -1,17 +1,13 @@
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Icon } from "@iconify/react";
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { twMerge } from "tailwind-merge";
 
 import { Button, ErrorMessage, Input, Label, PasswordInput } from "@/components";
 import { Trans, useTranslation } from "@/i18n";
 import { getRegisterRequestSchema, type RegisterRequest, useRegisterMutation } from "@/services";
 import { handleAxiosFieldErrors } from "@/utils";
-
-type RegisterFormProps = {
-  onSuccess?: () => void;
-};
 
 const baseInputClasses =
   "h-11 rounded-md bg-background-default-default text-sm placeholder:text-text-default";
@@ -21,8 +17,9 @@ const errorInputClasses =
 
 const normalInputClasses = "border-border-default text-text-default";
 
-export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
+export const RegisterForm = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const { isPending: isRegisterPending, mutate: registerUser } = useRegisterMutation();
 
@@ -39,7 +36,9 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
 
   const onSubmit: SubmitHandler<RegisterRequest> = (data) => {
     registerUser(data, {
-      onSuccess,
+      onSuccess: () => {
+        navigate({ to: "/register/success" });
+      },
       onError: (error) => {
         handleAxiosFieldErrors<RegisterRequest>(error, setError, t("register.signUpFailed"));
       },
