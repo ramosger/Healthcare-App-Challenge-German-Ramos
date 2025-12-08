@@ -32,7 +32,8 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
     register,
     setError,
   } = useForm<RegisterRequest>({
-    mode: "onTouched",
+    mode: "onSubmit",
+    reValidateMode: "onChange",
     resolver: zodResolver(getRegisterRequestSchema()),
   });
 
