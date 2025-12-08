@@ -27,7 +27,7 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
   const { isPending: isRegisterPending, mutate: registerUser } = useRegisterMutation();
 
   const {
-    formState: { errors, isValid },
+    formState: { errors },
     handleSubmit,
     register,
     setError,
@@ -126,7 +126,7 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
 
         <Button
           className="text-md flex h-10 w-full items-center justify-center gap-2 rounded-md bg-background-brand-default px-3 py-2 font-medium text-text-neutral-on-neutral"
-          disabled={!isValid || isRegisterPending}
+          disabled={isRegisterPending}
           type="submit"
         >
           {isRegisterPending ? (
