@@ -48,24 +48,24 @@ export const getRegisterRequestSchema = () => {
             length: 8,
           }),
         }),
-      confirmPassword: z
+      passwordConfirmation: z
         .string()
         .min(1, {
-          message: i18n.t("form.passwordErrors.confirmPasswordRequired"),
+          message: i18n.t("form.passwordErrors.passwordConfirmationRequired"),
         })
         .min(8, {
           message: i18n.t("form.errors.minLength", {
-            field: i18n.t("form.confirmPassword"),
+            field: i18n.t("form.passwordConfirmation"),
             length: 8,
           }),
         }),
     })
-    .superRefine(({ confirmPassword, password }, ctx) => {
-      if (password !== confirmPassword) {
+    .superRefine(({ password, passwordConfirmation }, ctx) => {
+      if (password !== passwordConfirmation) {
         ctx.addIssue({
           code: "custom",
           message: i18n.t("form.errors.passwordMismatch"),
-          path: ["confirmPassword"],
+          path: ["passwordConfirmation"],
         });
       }
     });

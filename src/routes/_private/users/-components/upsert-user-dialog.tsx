@@ -133,7 +133,7 @@ export const UpsertUserDialog = ({ isOpen, onOpenChange, user }: UpsertUserDialo
           </div>
 
           <div className="flex flex-col gap-2">
-            <Label htmlFor="passwordConfirmation">{t("form.confirmPassword")}</Label>
+            <Label htmlFor="passwordConfirmation">{t("form.passwordConfirmation")}</Label>
 
             <PasswordInput
               {...register("passwordConfirmation")}

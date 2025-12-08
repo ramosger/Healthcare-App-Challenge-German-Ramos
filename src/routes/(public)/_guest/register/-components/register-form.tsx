@@ -108,20 +108,20 @@ export const RegisterForm = () => {
         </div>
 
         <div className="flex flex-col gap-2">
-          <Label className="text-sm font-normal" htmlFor="confirmPassword">
-            {t("form.confirmPassword")}
+          <Label className="text-sm font-normal" htmlFor="passwordConfirmation">
+            {t("form.passwordConfirmation")}
           </Label>
 
           <PasswordInput
-            {...register("confirmPassword")}
+            {...register("passwordConfirmation")}
             className={twMerge(
               baseInputClasses,
-              errors.confirmPassword ? errorInputClasses : normalInputClasses,
+              errors.passwordConfirmation ? errorInputClasses : normalInputClasses,
             )}
-            placeholder={t("form.confirmPassword")}
+            placeholder={t("form.passwordConfirmation")}
           />
 
-          <ErrorMessage errorMessage={errors?.confirmPassword?.message} />
+          <ErrorMessage errorMessage={errors?.passwordConfirmation?.message} />
         </div>
 
         <Button

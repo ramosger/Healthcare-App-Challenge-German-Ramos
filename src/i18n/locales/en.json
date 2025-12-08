@@ -22,7 +22,7 @@
     "password": "Password",
     "fullName": "Full name",
     "name": "Name",
-    "confirmPassword": "Confirm Password",
+    "passwordConfirmation": "Confirm Password",
     "passwordMustInclude": "Password must include",
     "errors": {
       "required": "{field} is required.",
@@ -34,7 +34,7 @@
     },
     "passwordErrors": {
       "passwordTooWeak": "Password is too weak.",
-      "confirmPasswordRequired": "Please confirm your password."
+      "passwordConfirmationRequired": "Please confirm your password."
     }
   },
   "register": {

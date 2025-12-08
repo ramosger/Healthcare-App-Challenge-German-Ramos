@@ -8,11 +8,11 @@ export const login = ({ email, password }: LoginRequest) => {
   // return publicApi.post<ServiceResponse<LoginResponse>>('auth/login', { email, password });
 };
 
-export const register = ({ confirmPassword, email, name, password }: RegisterRequest) => {
+export const register = ({ email, name, password, passwordConfirmation }: RegisterRequest) => {
   return publicApi.post<void>("/auth/signup", {
     name,
     email,
     password,
-    password_confirmation: confirmPassword,
+    passwordConfirmation,
   });
 };
