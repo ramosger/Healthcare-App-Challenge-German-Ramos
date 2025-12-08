@@ -139,7 +139,7 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
           {t("register.createAccount")}
         </Button>
 
-        <p className="pt-2 text-center text-sm">
+        <div className="pt-2 text-center text-sm">
           <Trans
             components={{
               Link: (
@@ -151,7 +151,7 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
             }}
             i18nKey="register.withAccount"
           />
-        </p>
+        </div>
       </form>
     </>
   );
