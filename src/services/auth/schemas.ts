@@ -17,7 +17,7 @@ export const loginResponseSchema = z.object({
   authToken: z.string(),
 });
 
-export const getRegisterRequestSchema = () => {
+export const getRegisterSchema = () => {
   return z
     .object({
       name: z.string().min(4, {

@@ -6,7 +6,7 @@ import { twMerge } from "tailwind-merge";
 
 import { Button, ErrorMessage, Input, Label, PasswordInput } from "@/components";
 import { Trans, useTranslation } from "@/i18n";
-import { getRegisterRequestSchema, type RegisterRequest, useRegister } from "@/services";
+import { getRegisterSchema, type RegisterRequest, useRegister } from "@/services";
 import { handleAxiosFieldErrors } from "@/utils";
 
 const baseInputClasses =
@@ -31,7 +31,7 @@ export const RegisterForm = () => {
   } = useForm<RegisterRequest>({
     mode: "onSubmit",
     reValidateMode: "onChange",
-    resolver: zodResolver(getRegisterRequestSchema()),
+    resolver: zodResolver(getRegisterSchema()),
   });
 
   const onSubmit: SubmitHandler<RegisterRequest> = (data) => {
