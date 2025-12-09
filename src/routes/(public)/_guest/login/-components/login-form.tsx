@@ -40,7 +40,7 @@ export const LoginForm = () => {
     loginUser(data, {
       onSuccess: async ({ data: { authToken } }) => {
         setAuthStoreToken(authToken);
-        await navigate({ to: search.redirect || "/" });
+        await navigate({ to: search.redirect || "/home" });
       },
       onError: () => {
         setError("password", {
