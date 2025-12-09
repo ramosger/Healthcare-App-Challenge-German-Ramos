@@ -1,11 +1,8 @@
 import { publicApi } from "@/config/api";
-import type { LoginRequest, RegisterPayload } from "./types";
+import type { LoginPayload, LoginResponse, RegisterPayload } from "./types";
 
-export const login = ({ email, password }: LoginRequest) => {
-  return Promise.resolve({
-    data: { authToken: `super-encrypted-auth-token-for-${email}-${password}` },
-  });
-  // return publicApi.post<ServiceResponse<LoginResponse>>('auth/login', { email, password });
+export const login = ({ email, password }: LoginPayload) => {
+  return publicApi.post<LoginResponse>("/auth/login", { email, password });
 };
 
 export const register = ({ email, name, password, passwordConfirmation }: RegisterPayload) => {
@@ -13,6 +10,6 @@ export const register = ({ email, name, password, passwordConfirmation }: Regist
     name,
     email,
     password,
-    passwordConfirmation,
+    password_confirmation: passwordConfirmation,
   });
 };

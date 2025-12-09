@@ -1,19 +1,27 @@
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Link, useNavigate, useRouter, useSearch } from "@tanstack/react-router";
+import { Icon } from "@iconify/react";
+import { Link, useNavigate, useSearch } from "@tanstack/react-router";
+import { twMerge } from "tailwind-merge";
 
-import { Button, ErrorMessage, Input, Label, PasswordInput, toast } from "@/components";
+import { Button, ErrorMessage, Input, Label, PasswordInput } from "@/components";
 import { Trans, useTranslation } from "@/i18n";
-import { getLoginRequestSchema, type LoginRequest, useLoginMutation } from "@/services";
+import { getLoginSchema, type LoginPayload, useLogin } from "@/services";
 import { setAuthStoreToken } from "@/stores";
-import { handleAxiosFieldErrors } from "@/utils";
+
+const baseInputClasses =
+  "h-11 rounded-md bg-background-default-default text-sm placeholder:text-text-default";
+
+const errorInputClasses =
+  "border-border-danger-tertiary text-icon-danger-default focus:border-border-danger-tertiary focus:ring-0 focus-visible:border-border-danger-tertiary focus-visible:ring-0";
+
+const normalInputClasses = "border-border-default text-text-default";
 
 export const LoginForm = () => {
   const { t } = useTranslation();
 
-  const loginMutation = useLoginMutation();
+  const { isPending: isLoginPending, mutate: loginUser } = useLogin();
 
-  const router = useRouter();
   const search = useSearch({ from: "/(public)/_guest/login/" });
   const navigate = useNavigate();
 
@@ -22,64 +30,102 @@ export const LoginForm = () => {
     handleSubmit,
     register,
     setError,
-  } = useForm({
-    mode: "onTouched",
-    resolver: zodResolver(getLoginRequestSchema()),
+  } = useForm<LoginPayload>({
+    mode: "onSubmit",
+    reValidateMode: "onChange",
+    resolver: zodResolver(getLoginSchema()),
   });
 
-  const onSubmit: SubmitHandler<LoginRequest> = (data) => {
-    loginMutation.mutate(data, {
+  const onSubmit: SubmitHandler<LoginPayload> = (data) => {
+    loginUser(data, {
       onSuccess: async ({ data: { authToken } }) => {
-        toast.success(t("login.success"));
         setAuthStoreToken(authToken);
-        await router.invalidate();
         await navigate({ to: search.redirect || "/" });
       },
-      onError: (error) => {
-        handleAxiosFieldErrors<LoginRequest>(error, setError, t("login.error"));
+      onError: () => {
+        setError("password", {
+          type: "manual",
+          message: t("login.invalidCredentials"),
+        });
       },
     });
   };
 
   return (
-    <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex flex-col gap-2">
-        <Label htmlFor="email">{t("form.email")}</Label>
+    <>
+      <div className="flex flex-col gap-2 pb-6">
+        <h1 className="text-3xl font-normal tracking-tight text-text-default">
+          {t("login.title")}
+        </h1>
 
-        <Input {...register("email")} />
-
-        <ErrorMessage errorMessage={errors?.email?.message} />
+        <p className="text-md font-normal text-text-default-secondary">{t("login.subtitle")}</p>
       </div>
 
-      <div className="flex flex-col gap-2">
-        <div className="flex items-center justify-between">
-          <Label htmlFor="password">{t("form.password")}</Label>
+      <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex flex-col gap-2">
+          <Label className="text-sm font-normal" htmlFor="email">
+            {t("form.email")}
+          </Label>
 
-          <Link
-            className="ml-auto inline-block text-sm underline-offset-4 hover:underline hover:opacity-80"
-            to="/"
-          >
-            {t("login.forgotYourPassword")}
-          </Link>
+          <Input
+            {...register("email")}
+            className={twMerge(
+              baseInputClasses,
+              errors.email ? errorInputClasses : normalInputClasses,
+            )}
+            placeholder={t("form.email")}
+          />
+
+          <ErrorMessage errorMessage={errors?.email?.message} />
         </div>
 
-        <PasswordInput {...register("password")} />
+        <div className="flex flex-col gap-2">
+          <Label className="text-sm font-normal" htmlFor="password">
+            {t("form.password")}
+          </Label>
 
-        <ErrorMessage errorMessage={errors?.password?.message} />
-      </div>
+          <PasswordInput
+            {...register("password")}
+            className={twMerge(
+              baseInputClasses,
+              errors.password ? errorInputClasses : normalInputClasses,
+            )}
+            placeholder={t("form.password")}
+          />
 
-      <Button className="w-full" type="submit">
-        {t("login.login")}
-      </Button>
+          <ErrorMessage errorMessage={errors?.password?.message} />
+        </div>
 
-      <p className="text-center text-sm">
-        <Trans
-          components={{
-            Link: <Link className="underline underline-offset-4 hover:opacity-80" to="/register" />,
-          }}
-          i18nKey="login.noAccount"
-        />
-      </p>
-    </form>
+        <Button
+          aria-busy={isLoginPending}
+          className="text-md flex h-10 w-full items-center justify-center gap-2 rounded-md bg-background-brand-default px-3 py-2 font-medium text-text-neutral-on-neutral"
+          data-loading={isLoginPending}
+          disabled={isLoginPending}
+          type="submit"
+        >
+          {isLoginPending ? (
+            <Icon
+              className="size-5 animate-spin text-text-default-secondary"
+              icon="eos-icons:loading"
+            />
+          ) : null}
+          {t("login.login")}
+        </Button>
+
+        <div className="pt-2 text-center text-sm">
+          <Trans
+            components={{
+              Link: (
+                <Link
+                  className="font-medium text-text-default-secondary underline underline-offset-3 hover:opacity-80"
+                  to="/register"
+                />
+              ),
+            }}
+            i18nKey="login.noAccount"
+          />
+        </div>
+      </form>
+    </>
   );
 };
