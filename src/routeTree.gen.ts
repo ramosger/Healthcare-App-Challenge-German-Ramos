@@ -18,6 +18,7 @@ import { Route as PrivateSplatPageRouteImport } from './routes/_private/$.page'
 import { Route as publicTermsPageRouteImport } from './routes/(public)/terms.page'
 import { Route as publicGuestRegisterPageRouteImport } from './routes/(public)/_guest/register/page'
 import { Route as publicGuestLoginPageRouteImport } from './routes/(public)/_guest/login/page'
+import { Route as publicGuestHomePageRouteImport } from './routes/(public)/_guest/home/page'
 import { Route as publicGuestRegisterSuccessPageRouteImport } from './routes/(public)/_guest/register/success/page'
 
 const PrivateLayoutRoute = PrivateLayoutRouteImport.update({
@@ -63,6 +64,11 @@ const publicGuestLoginPageRoute = publicGuestLoginPageRouteImport.update({
   path: '/login/',
   getParentRoute: () => publicGuestLayoutRoute,
 } as any)
+const publicGuestHomePageRoute = publicGuestHomePageRouteImport.update({
+  id: '/home/',
+  path: '/home/',
+  getParentRoute: () => publicGuestLayoutRoute,
+} as any)
 const publicGuestRegisterSuccessPageRoute =
   publicGuestRegisterSuccessPageRouteImport.update({
     id: '/register/success/',
@@ -76,6 +82,7 @@ export interface FileRoutesByFullPath {
   '/$': typeof PrivateSplatPageRoute
   '/dashboard': typeof PrivateDashboardPageRoute
   '/users': typeof PrivateUsersPageRoute
+  '/home': typeof publicGuestHomePageRoute
   '/login': typeof publicGuestLoginPageRoute
   '/register': typeof publicGuestRegisterPageRoute
   '/register/success': typeof publicGuestRegisterSuccessPageRoute
@@ -86,6 +93,7 @@ export interface FileRoutesByTo {
   '/$': typeof PrivateSplatPageRoute
   '/dashboard': typeof PrivateDashboardPageRoute
   '/users': typeof PrivateUsersPageRoute
+  '/home': typeof publicGuestHomePageRoute
   '/login': typeof publicGuestLoginPageRoute
   '/register': typeof publicGuestRegisterPageRoute
   '/register/success': typeof publicGuestRegisterSuccessPageRoute
@@ -99,6 +107,7 @@ export interface FileRoutesById {
   '/_private/$/': typeof PrivateSplatPageRoute
   '/_private/dashboard/': typeof PrivateDashboardPageRoute
   '/_private/users/': typeof PrivateUsersPageRoute
+  '/(public)/_guest/home/': typeof publicGuestHomePageRoute
   '/(public)/_guest/login/': typeof publicGuestLoginPageRoute
   '/(public)/_guest/register/': typeof publicGuestRegisterPageRoute
   '/(public)/_guest/register/success/': typeof publicGuestRegisterSuccessPageRoute
@@ -111,6 +120,7 @@ export interface FileRouteTypes {
     | '/$'
     | '/dashboard'
     | '/users'
+    | '/home'
     | '/login'
     | '/register'
     | '/register/success'
@@ -121,6 +131,7 @@ export interface FileRouteTypes {
     | '/$'
     | '/dashboard'
     | '/users'
+    | '/home'
     | '/login'
     | '/register'
     | '/register/success'
@@ -133,6 +144,7 @@ export interface FileRouteTypes {
     | '/_private/$/'
     | '/_private/dashboard/'
     | '/_private/users/'
+    | '/(public)/_guest/home/'
     | '/(public)/_guest/login/'
     | '/(public)/_guest/register/'
     | '/(public)/_guest/register/success/'
@@ -209,6 +221,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof publicGuestLoginPageRouteImport
       parentRoute: typeof publicGuestLayoutRoute
     }
+    '/(public)/_guest/home/': {
+      id: '/(public)/_guest/home/'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof publicGuestHomePageRouteImport
+      parentRoute: typeof publicGuestLayoutRoute
+    }
     '/(public)/_guest/register/success/': {
       id: '/(public)/_guest/register/success/'
       path: '/register/success'
@@ -238,12 +257,14 @@ const PrivateLayoutRouteWithChildren = PrivateLayoutRoute._addFileChildren(
 )
 
 interface publicGuestLayoutRouteChildren {
+  publicGuestHomePageRoute: typeof publicGuestHomePageRoute
   publicGuestLoginPageRoute: typeof publicGuestLoginPageRoute
   publicGuestRegisterPageRoute: typeof publicGuestRegisterPageRoute
   publicGuestRegisterSuccessPageRoute: typeof publicGuestRegisterSuccessPageRoute
 }
 
 const publicGuestLayoutRouteChildren: publicGuestLayoutRouteChildren = {
+  publicGuestHomePageRoute: publicGuestHomePageRoute,
   publicGuestLoginPageRoute: publicGuestLoginPageRoute,
   publicGuestRegisterPageRoute: publicGuestRegisterPageRoute,
   publicGuestRegisterSuccessPageRoute: publicGuestRegisterSuccessPageRoute,

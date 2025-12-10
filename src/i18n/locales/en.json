@@ -118,5 +118,9 @@
       "dashboard": "Dashboard",
       "users": "Users"
     }
+  },
+  "header": {
+    "title": "HealthConnect",
+    "subtitle": "Find your healthcare provider"
   }
 }

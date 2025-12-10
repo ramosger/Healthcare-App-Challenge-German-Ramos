@@ -1,16 +1,17 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @plugin "tailwindcss-animate";
 
 body {
-  font-family: "DM Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+@layer base {
+  :root {
+    font-family: var(--font-sans);
+  }
 }
 
 :root {
@@ -189,12 +190,16 @@ code {
 @theme inline {
   --radius: 0.5rem;
 
-  --color-background-brand-default: var(--brand-800);
+  --color-text-primary: var(--brand-950);
+  --color-text-secondary: var(--brand-800);
+
+  --color-background-brand-default: var(--brand-900);
   --color-background-brand-hover: var(--slate-900);
   --color-background-brand-secondary: var(--brand-200);
   --color-background-brand-secondary-hover: var(--brand-300);
   --color-background-brand-tertiary: var(--brand-100);
   --color-background-brand-tertiary-hover: var(--brand-200);
+  --color-background-surface: var(--light-white);
 
   --color-background-danger-default: var(--red-500);
   --color-background-danger-hover: var(--red-600);
