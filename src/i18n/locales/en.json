@@ -122,5 +122,9 @@
   "header": {
     "title": "HealthConnect",
     "subtitle": "Find your healthcare provider"
+  },
+  "searchFilters": {
+    "title": "Healthcare Providers",
+    "subtitle": "Find and connect with healthcare professionals in your area"
   }
 }

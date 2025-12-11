@@ -1,0 +1,76 @@
+import { useMemo, useState } from "react";
+import type { Provider } from "@domain";
+import { initialProviderFilters, type ProviderFilters } from "@services";
+import { ErrorComponent, Spinner } from "@shared";
+
+import { useProviders } from "../../hooks";
+import { SearchFilters } from "../-filters";
+import { ProviderCard, ProviderDetailsModal } from "..";
+
+export const ProvidersListing = () => {
+  const [filters, setFilters] = useState<ProviderFilters>(initialProviderFilters);
+  const [selectedProviderId, setSelectedProviderId] = useState<Provider["id"] | null>(null);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const { error, isLoading, providers, refetch, visibleProviders } = useProviders(
+    filters,
+    searchTerm,
+  );
+
+  const selectedProvider = useMemo(() => {
+    return (
+      visibleProviders.find(({ id }) => {
+        return id === selectedProviderId;
+      }) ?? null
+    );
+  }, [visibleProviders, selectedProviderId]);
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center py-110">
+        <Spinner />
+      </div>
+    );
+  }
+
+  if (error) {
+    return <ErrorComponent error={error} fetchData={refetch} />;
+  }
+
+  return (
+    <>
+      <SearchFilters
+        filters={filters}
+        onFiltersChange={setFilters}
+        onSearchChange={setSearchTerm}
+        providers={providers}
+        resultsCount={visibleProviders.length}
+        searchTerm={searchTerm}
+      />
+
+      <div className="grid w-full grid-cols-1 gap-3 px-6 lg:grid-cols-3 lg:gap-4 lg:px-44">
+        {visibleProviders.map((provider) => {
+          return (
+            <ProviderCard
+              key={provider.id}
+              onViewDetails={() => {
+                return setSelectedProviderId(provider.id);
+              }}
+              provider={provider}
+            />
+          );
+        })}
+      </div>
+
+      {selectedProvider ? (
+        <ProviderDetailsModal
+          onClose={() => {
+            return setSelectedProviderId(null);
+          }}
+          provider={selectedProvider}
+          isOpen
+        />
+      ) : null}
+    </>
+  );
+};
