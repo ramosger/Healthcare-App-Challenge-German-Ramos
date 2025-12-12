@@ -1,8 +1,9 @@
 import { useMemo } from "react";
 
 import { GENDER_OPTIONS, PROVIDER_FILTER_KEYS } from "@/constants";
+import { useTranslation } from "@/i18n";
+import { buildProviderFilterOptions, type ProviderFilters } from "@/services";
 import type { Provider } from "@/types";
-import { buildProviderFilterOptions, type ProviderFilters } from "../../services";
 import { FilterDropdown, NameFilter, SearchFiltersHeader } from "..";
 
 type SearchFiltersProps = {
@@ -26,6 +27,8 @@ export const SearchFilters = ({
     return buildProviderFilterOptions(providers);
   }, [providers]);
 
+  const { t } = useTranslation();
+
   const createFilterChangeHandler = (key: keyof ProviderFilters) => {
     return (value: string | null) => {
       onFiltersChange({
@@ -48,7 +51,7 @@ export const SearchFilters = ({
           <FilterDropdown
             onChange={createFilterChangeHandler(PROVIDER_FILTER_KEYS.SPECIALTY)}
             options={specialtyOptions}
-            placeholder="All specialities"
+            placeholder="All specialties"
             value={filters.specialtyId}
           />
 
@@ -69,7 +72,7 @@ export const SearchFilters = ({
       </div>
 
       <p className="justify-start self-stretch text-base leading-6 font-medium text-text-secondary">
-        {resultsCount} {providerLabel} found
+        {resultsCount} {providerLabel} {t("searchFilters.found")}
       </p>
     </section>
   );

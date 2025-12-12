@@ -125,6 +125,7 @@
   },
   "searchFilters": {
     "title": "Healthcare Providers",
-    "subtitle": "Find and connect with healthcare professionals in your area"
+    "subtitle": "Find and connect with healthcare professionals in your area",
+    "found": "found"
   }
 }

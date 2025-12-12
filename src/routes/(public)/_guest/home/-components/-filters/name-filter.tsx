@@ -1,5 +1,6 @@
 import type { ComponentProps } from "react";
-import { SearchInput } from "@shared";
+
+import { SearchInput } from "@/components";
 
 type NameFilterProps = ComponentProps<typeof SearchInput>;
 
