@@ -1,5 +1,5 @@
 import type { DropdownOption, Provider } from "@/types";
-import type { ProviderFilterOptions } from "./types";
+import type { ProviderFilterOptions, ProviderFilters } from "./types";
 
 export const buildProviderFilterOptions = (providers: Provider[]): ProviderFilterOptions => {
   const specialtiesMap = new Map<string, { id: string; name: string }>();
@@ -33,4 +33,25 @@ export const buildProviderFilterOptions = (providers: Provider[]): ProviderFilte
   });
 
   return { specialtyOptions, clinicOptions };
+};
+
+export const initialProviderFilters: ProviderFilters = {
+  specialtyId: null,
+  clinicId: null,
+  gender: null,
+};
+
+export const hasActiveProviderFilters = (filters: ProviderFilters): boolean => {
+  return filters.specialtyId !== null || filters.clinicId !== null || filters.gender !== null;
+};
+
+export const getVisibleProviders = (filteredProviders: Provider[], searchTerm: string) => {
+  const term = searchTerm.trim().toLowerCase();
+  if (!term) {
+    return filteredProviders;
+  }
+
+  return filteredProviders.filter((p) => {
+    return p.name.toLowerCase().includes(term);
+  });
 };

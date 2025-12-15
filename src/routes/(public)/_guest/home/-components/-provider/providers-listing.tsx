@@ -1,9 +1,9 @@
 import { useMemo, useState } from "react";
-import type { Provider } from "@domain";
-import { initialProviderFilters, type ProviderFilters } from "@services";
-import { ErrorComponent, Spinner } from "@shared";
 
-import { useProviders } from "../../hooks";
+import { ErrorComponent, Spinner } from "@/components";
+import { useProviders } from "@/hooks";
+import { initialProviderFilters, type ProviderFilters } from "@/services";
+import type { Provider } from "@/types";
 import { SearchFilters } from "../-filters";
 import { ProviderCard, ProviderDetailsModal } from "..";
 

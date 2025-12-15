@@ -14,6 +14,7 @@ const AVAILABLE_ICONIFY_ICONS = {
   Circle: "circle",
   Home: "home",
   LoaderCircle: "loader-circle",
+  LocationPin: "weui:location-outlined",
   LogOut: "log-out",
   MoreHorizontal: "more-horizontal",
   Menu: "menu",
@@ -25,6 +26,10 @@ const AVAILABLE_ICONIFY_ICONS = {
   EyeOff: "eye-off",
   Lock: "lock",
   Logout: "material-symbols:logout",
+  User: "ph:user",
+  Mail: "material-symbols:mail-outline",
+  Phone: "solar:phone-linear",
+  World: "jam:world",
 };
 
 export const initializeIcons = () => {

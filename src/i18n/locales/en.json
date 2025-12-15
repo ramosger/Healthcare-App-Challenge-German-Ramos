@@ -127,5 +127,17 @@
     "title": "Healthcare Providers",
     "subtitle": "Find and connect with healthcare professionals in your area",
     "found": "found"
+  },
+  "errorComponent": {
+    "tryAgain": "Try again"
+  },
+  "provider": {
+    "details": {
+      "title": "View details",
+      "subtitle": "Overview"
+    },
+    "locations": "Locations",
+    "viewOnMaps": "View on Google Maps",
+    "noLanguage": "No language information available" 
   }
 }
