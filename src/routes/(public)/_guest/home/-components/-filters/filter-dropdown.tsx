@@ -43,9 +43,9 @@ export const FilterDropdown = ({ onChange, options, placeholder, value }: Filter
               </span>
             </div>
 
-            <div className="flex items-center justify-start gap-2 self-stretch pr-3">
+            <div className="flex items-center justify-start gap-2 self-stretch pr-3 pb-1">
               <div className="relative size-4">
-                <Icons.Logo className="size-4 lg:size-6" />
+                <Icons.ChevronDown className="size-6" />
               </div>
             </div>
           </div>

@@ -6,12 +6,16 @@ type SearchInputProps = {
   onChange?: (value: string) => void;
 };
 
-export const SearchInput = ({ onChange, placeholder = "Search...", value }: SearchInputProps) => {
+export const SearchInput = ({
+  onChange,
+  placeholder = "Search providers by name...",
+  value,
+}: SearchInputProps) => {
   return (
     <div className="inline-flex h-10 items-center justify-start self-stretch overflow-hidden rounded-md bg-background-surface outline-1 -outline-offset-1 outline-border-default">
       <div className="flex flex-1 items-center justify-start overflow-hidden">
         <div className="flex items-center justify-start gap-2 self-stretch pl-3">
-          <Icons.Search className="size-8.5 lg:size-10" />
+          <Icons.Search className="size-4 text-text-primary" />
         </div>
 
         <div className="flex flex-1 items-center justify-between self-stretch px-3 py-1.5 font-light">

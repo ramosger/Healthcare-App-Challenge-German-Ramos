@@ -71,7 +71,7 @@ export const SearchFilters = ({
         </div>
       </div>
 
-      <p className="justify-start self-stretch text-base leading-6 font-medium text-text-secondary">
+      <p className="justify-start self-stretch text-base leading-6 font-medium text-text-tertiary">
         {resultsCount} {providerLabel} {t("searchFilters.found")}
       </p>
     </section>

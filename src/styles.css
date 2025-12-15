@@ -44,7 +44,7 @@ body {
   --brand-200: #d1d7e6;
   --brand-300: #a9b4d0;
   --brand-400: #7b8db5;
-  --brand-500: #5a6f9d;
+  --brand-500: #5A5F70;
   --brand-600: #475882;
   --brand-700: #3a476a;
   --brand-800: #333e59;
@@ -192,6 +192,7 @@ body {
 
   --color-text-primary: var(--brand-950);
   --color-text-secondary: var(--brand-800);
+  --color-text-tertiary: var(--brand-500);
 
   --color-background-brand-default: var(--brand-900);
   --color-background-brand-hover: var(--slate-900);

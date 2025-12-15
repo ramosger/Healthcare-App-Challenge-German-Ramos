@@ -7,7 +7,7 @@ import { SIZE, type Size, type Styled } from "@/types/styles";
 
 const AVAILABLE_ICONIFY_ICONS = {
   Check: "check",
-  ChevronDown: "chevron-down",
+  ChevronDown: "mdi-light:chevron-down",
   ChevronRight: "chevron-right",
   ChevronUp: "chevron-up",
   ChevronLeft: "chevron-left",
@@ -18,7 +18,7 @@ const AVAILABLE_ICONIFY_ICONS = {
   LogOut: "log-out",
   MoreHorizontal: "more-horizontal",
   Menu: "menu",
-  Search: "search",
+  Search: "formkit:search",
   Slash: "slash",
   Close: "x",
   Plus: "plus",
