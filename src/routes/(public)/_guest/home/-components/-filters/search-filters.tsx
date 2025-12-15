@@ -7,7 +7,7 @@ import type { Provider } from "@/types";
 import { FilterDropdown, NameFilter, SearchFiltersHeader } from "..";
 
 type SearchFiltersProps = {
-  resultsCount: number;
+  resultsCount?: number;
   providers: Provider[];
   filters: ProviderFilters;
   onFiltersChange: (f: ProviderFilters) => void;
@@ -71,9 +71,11 @@ export const SearchFilters = ({
         </div>
       </div>
 
-      <p className="justify-start self-stretch text-base leading-6 font-medium text-text-tertiary">
-        {resultsCount} {providerLabel} {t("searchFilters.found")}
-      </p>
+      {resultsCount !== undefined ? (
+        <p className="justify-start self-stretch text-base leading-6 font-medium text-text-tertiary">
+          {resultsCount} {providerLabel} {t("searchFilters.found")}
+        </p>
+      ) : null}
     </section>
   );
 };

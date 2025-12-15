@@ -1,13 +1,13 @@
 import { useMemo, useState } from "react";
 
-import { ErrorComponent, Spinner } from "@/components";
+import { ErrorComponent } from "@/components";
 import { EmptyState } from "@/components";
 import { useProviders } from "@/hooks";
 import { useTranslation } from "@/i18n";
 import { initialProviderFilters, type ProviderFilters } from "@/services";
 import type { Provider } from "@/types";
 import { SearchFilters } from "../-filters";
-import { ProviderCard, ProviderDetailsModal } from "..";
+import { ProviderCard, ProviderCardSkeleton, ProviderDetailsModal } from "..";
 
 export const ProvidersListing = () => {
   const [filters, setFilters] = useState<ProviderFilters>(initialProviderFilters);
@@ -30,9 +30,22 @@ export const ProvidersListing = () => {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center py-110">
-        <Spinner />
-      </div>
+      <>
+        <SearchFilters
+          filters={filters}
+          onFiltersChange={setFilters}
+          onSearchChange={setSearchTerm}
+          providers={providers}
+          resultsCount={undefined}
+          searchTerm={searchTerm}
+        />
+
+        <div className="grid w-full grid-cols-1 gap-3 px-6 lg:grid-cols-3 lg:gap-4 lg:px-44">
+          {Array.from({ length: 6 }).map((_, idx) => {
+            return <ProviderCardSkeleton key={idx} />;
+          })}
+        </div>
+      </>
     );
   }
 

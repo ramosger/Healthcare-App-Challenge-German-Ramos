@@ -1,4 +1,5 @@
 export * from "./provider-card";
+export * from "./provider-card-skeleton";
 export * from "./provider-contact-row";
 export * from "./provider-details-modal";
 export * from "./provider-locations";
