@@ -5,6 +5,7 @@ export * from "./card";
 export * from "./checkbox";
 export * from "./dialog";
 export * from "./dropdown-menu";
+export * from "./empty-state";
 export * from "./error-component";
 export * from "./error-message";
 export * from "./icons";
