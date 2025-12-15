@@ -1,6 +1,7 @@
 import { Icons } from "@/components";
 import { useTranslation } from "@/i18n";
 import type { Provider } from "@/types";
+import { buildMediaUrl } from "@/utils";
 
 type ProviderCardProps = {
   provider: Provider;
@@ -8,11 +9,12 @@ type ProviderCardProps = {
 };
 
 export const ProviderCard = ({ onViewDetails, provider }: ProviderCardProps) => {
-  const { clinics, name, profile_pic, specialty } = provider;
+  const { clinics, name, profilePic, specialty } = provider;
   const { t } = useTranslation();
 
   const primaryClinic = clinics[0];
   const primaryLocation = primaryClinic?.name ?? primaryClinic?.address ?? "No main location";
+  const profileImage = buildMediaUrl(profilePic);
 
   const extraLocationsCount = clinics.length > 1 ? clinics.length - 1 : 0;
   const extraLocationsLabel =
@@ -22,7 +24,7 @@ export const ProviderCard = ({ onViewDetails, provider }: ProviderCardProps) => 
 
   return (
     <div className="flex flex-col self-stretch overflow-hidden rounded-xl bg-background-surface outline-1 outline-border-default">
-      <img alt={name} className="h-56 w-full object-cover" src={profile_pic} />
+      <img alt={name} className="h-56 w-full object-cover" src={profileImage} />
 
       <div className="flex flex-1 flex-col justify-between gap-3 p-5">
         <div className="flex flex-col gap-5">

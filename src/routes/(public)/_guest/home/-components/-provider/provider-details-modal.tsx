@@ -5,6 +5,7 @@ import { Icons } from "@/components";
 import { useTranslation } from "@/i18n";
 import { DETAIL_TABS, type DetailTab } from "@/services";
 import type { Provider } from "@/types";
+import { buildMediaUrl } from "@/utils";
 import { ProviderLocations, ProviderOverview } from "..";
 
 type ProviderDetailsModalProps = {
@@ -18,8 +19,9 @@ export const ProviderDetailsModal = ({ isOpen, onClose, provider }: ProviderDeta
   const baseTabClasses =
     "flex-1 cursor-pointer py-2 text-sm font-light rounded-full inline-flex items-center justify-center gap-2 transition";
 
-  const { about, email, languages, name, phone, profile_pic, specialty } = provider;
+  const { about, email, languages, name, phone, profilePic, specialty } = provider;
   const { t } = useTranslation();
+  const profileImage = buildMediaUrl(profilePic);
 
   if (!isOpen) {
     return null;
@@ -35,7 +37,7 @@ export const ProviderDetailsModal = ({ isOpen, onClose, provider }: ProviderDeta
         </div>
 
         <div className="flex items-center gap-4 pb-4">
-          <img alt={name} className="size-20 rounded-lg object-cover" src={profile_pic} />
+          <img alt={name} className="size-20 rounded-lg object-cover" src={profileImage} />
 
           <div>
             <h2 className="text-2xl font-semibold text-text-primary">{name}</h2>
