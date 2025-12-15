@@ -35,7 +35,7 @@ export const ProviderCard = ({ onViewDetails, provider }: ProviderCardProps) => 
 
           <div className="flex flex-col gap-3">
             <div className="inline-flex items-center gap-1">
-              <Icons.LocationPin className="size-8.5 lg:size-10" />
+              <Icons.LocationPin className="size-6" />
               <span className="text-base leading-6 font-medium text-text-secondary">
                 {primaryLocation}
               </span>
@@ -52,7 +52,7 @@ export const ProviderCard = ({ onViewDetails, provider }: ProviderCardProps) => 
         </div>
 
         <button
-          className="bg-background-brand text-text-neutral w-full cursor-pointer rounded-md py-2 text-base leading-6 font-medium"
+          className="w-full cursor-pointer rounded-md bg-background-brand-default py-2 text-base leading-6 font-medium text-text-neutral-on-neutral"
           onClick={onViewDetails}
           type="button"
         >

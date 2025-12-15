@@ -32,9 +32,13 @@ export const ProviderDetailsModal = ({ isOpen, onClose, provider }: ProviderDeta
       <button className="absolute inset-0 bg-black/50" onClick={onClose} />
 
       <div className="relative z-50 flex max-h-[624px] w-[90%] max-w-lg flex-col rounded-2xl border border-border-default bg-background-surface p-6 shadow-xl lg:max-h-[546px] lg:w-full lg:max-w-xl">
-        <div className="cursor-pointer">
-          <Icons.Close className="size-8.5 lg:size-10" onClose={onClose} />
-        </div>
+        <button
+          className="absolute top-4 right-4 cursor-pointer rounded-md p-1 text-text-tertiary transition"
+          onClick={onClose}
+          type="button"
+        >
+          <Icons.Close className="size-6" />
+        </button>
 
         <div className="flex items-center gap-4 pb-4">
           <img alt={name} className="size-20 rounded-lg object-cover" src={profileImage} />
@@ -45,20 +49,20 @@ export const ProviderDetailsModal = ({ isOpen, onClose, provider }: ProviderDeta
           </div>
         </div>
 
-        <div className="bg-background-tertiary rounded-full">
+        <div className="rounded-full bg-background-brand-tertiary">
           <div className="bg-background-default flex rounded-full p-1">
             <button
               className={twMerge(
                 baseTabClasses,
                 tab === DETAIL_TABS.OVERVIEW
-                  ? "bg-background-brand text-white"
+                  ? "bg-background-brand-default text-white"
                   : "bg-background-tertiary text-text-primary",
               )}
               onClick={() => {
                 return setTab(DETAIL_TABS.OVERVIEW);
               }}
             >
-              <Icons.User className="size-8.5 lg:size-10" />
+              <Icons.User className="size-6" />
               {t("provider.details.subtitle")}
             </button>
 
@@ -66,14 +70,14 @@ export const ProviderDetailsModal = ({ isOpen, onClose, provider }: ProviderDeta
               className={twMerge(
                 baseTabClasses,
                 tab === DETAIL_TABS.LOCATIONS
-                  ? "bg-background-brand text-white"
+                  ? "bg-background-brand-default text-white"
                   : "bg-background-tertiary text-text-primary",
               )}
               onClick={() => {
                 return setTab(DETAIL_TABS.LOCATIONS);
               }}
             >
-              <Icons.LocationPin className="size-8.5 lg:size-10" />
+              <Icons.LocationPin className="size-6" />
               {t("provider.locations")}
             </button>
           </div>

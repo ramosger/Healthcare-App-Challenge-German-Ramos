@@ -21,15 +21,15 @@ export const ProviderOverview = ({ about, email, languages, phone }: ProviderOve
 
       <ProviderOverviewSection title="Contact information">
         <div className="flex flex-col gap-1 pt-1 lg:flex-row lg:gap-8">
-          <ProviderContactRow icon={<Icons.Phone className="size-8.5 lg:size-10" />} text={phone} />
-          <ProviderContactRow icon={<Icons.Logo className="size-8.5 lg:size-10" />} text={email} />
+          <ProviderContactRow icon={<Icons.Phone className="size-6" />} text={phone} />
+          <ProviderContactRow icon={<Icons.Mail className="size-6" />} text={email} />
         </div>
       </ProviderOverviewSection>
 
       <ProviderOverviewSection title="Languages" withDivider={false}>
         {languages.length > 0 ? (
           <div className="inline-flex items-center gap-2 pt-2">
-            <Icons.World className="size-8.5 lg:size-10" />
+            <Icons.World className="size-6" />
             <p className="font-light text-text-default-secondary">{languages.join(", ")}</p>
           </div>
         ) : (

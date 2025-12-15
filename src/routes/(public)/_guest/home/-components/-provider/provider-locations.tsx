@@ -38,7 +38,7 @@ export const ProviderLocations = ({ locations }: ProviderLocationsProps) => {
                   rel="noreferrer"
                   target="_blank"
                 >
-                  <Icons.LocationPin className="size-8.5 lg:size-10" />
+                  <Icons.LocationPin className="size-6" />
                   {t("provider.viewOnMaps")}
                 </a>
               ) : null}
