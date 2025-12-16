@@ -11,6 +11,6 @@ const RouteComponent = () => {
   );
 };
 
-export const Route = createFileRoute("/(public)/_guest/home/")({
+export const Route = createFileRoute("/_private/providers/")({
   component: RouteComponent,
 });

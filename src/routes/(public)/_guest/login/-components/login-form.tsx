@@ -1,7 +1,7 @@
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Icon } from "@iconify/react";
-import { Link, useNavigate, useSearch } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { twMerge } from "tailwind-merge";
 
 import { Button, ErrorMessage, Input, Label, PasswordInput } from "@/components";
@@ -22,7 +22,6 @@ export const LoginForm = () => {
 
   const { isPending: isLoginPending, mutate: loginUser } = useLogin();
 
-  const search = useSearch({ from: "/(public)/_guest/login/" });
   const navigate = useNavigate();
 
   const {
@@ -40,7 +39,7 @@ export const LoginForm = () => {
     loginUser(data, {
       onSuccess: async ({ data }) => {
         setAuthStoreToken(data.data.accessToken);
-        await navigate({ to: search.redirect || "/home" });
+        await navigate({ to: "/providers", replace: true });
       },
       onError: () => {
         setError("password", {
