@@ -9,12 +9,12 @@ type ProviderCardProps = {
 };
 
 export const ProviderCard = ({ onViewDetails, provider }: ProviderCardProps) => {
-  const { clinics, name, profilePic, specialty } = provider;
+  const { clinics, name, profile_pic, specialty } = provider;
   const { t } = useTranslation();
 
   const primaryClinic = clinics[0];
   const primaryLocation = primaryClinic?.name ?? primaryClinic?.address ?? "No main location";
-  const profileImage = buildMediaUrl(profilePic);
+  const profileImage = buildMediaUrl(profile_pic);
 
   const extraLocationsCount = clinics.length > 1 ? clinics.length - 1 : 0;
   const extraLocationsLabel =

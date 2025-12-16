@@ -8,7 +8,7 @@ export type Provider = {
   gender: string;
   about: string;
   clinics: Clinic[];
-  profilePic: string | null;
+  profile_pic: string | null;
   specialty: Specialty;
   languages: string[];
 };

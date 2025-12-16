@@ -19,9 +19,9 @@ export const ProviderDetailsModal = ({ isOpen, onClose, provider }: ProviderDeta
   const baseTabClasses =
     "flex-1 cursor-pointer py-2 text-sm font-light rounded-full inline-flex items-center justify-center gap-2 transition";
 
-  const { about, email, languages, name, phone, profilePic, specialty } = provider;
+  const { about, email, languages, name, phone, profile_pic, specialty } = provider;
   const { t } = useTranslation();
-  const profileImage = buildMediaUrl(profilePic);
+  const profileImage = buildMediaUrl(profile_pic);
 
   if (!isOpen) {
     return null;
