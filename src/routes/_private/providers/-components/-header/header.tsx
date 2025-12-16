@@ -1,9 +1,26 @@
+import { useNavigate } from "@tanstack/react-router";
+
 import { Icons } from "@/components";
 import { useTranslation } from "@/i18n";
+import { useLogout } from "@/services";
+import { setAuthStoreToken } from "@/stores";
 import { ProfileMenu } from "./profile-menu";
 
 export const Header = () => {
   const { t } = useTranslation();
+
+  const navigate = useNavigate();
+
+  const { mutate: logoutUser } = useLogout();
+
+  const handleLogout = () => {
+    logoutUser(undefined, {
+      onSettled: async () => {
+        setAuthStoreToken(null);
+        await navigate({ to: "/login", replace: true });
+      },
+    });
+  };
 
   return (
     <header className="fixed top-0 left-0 z-50 inline-flex w-full items-center justify-between border-b border-border-default-default bg-white p-6 lg:px-44 lg:py-6">
@@ -28,7 +45,7 @@ export const Header = () => {
         email="adamsmith@gmail.com"
         initials="AS"
         name="Adam Smith"
-        onLogout={() => {}}
+        onLogout={handleLogout}
       />
     </header>
   );

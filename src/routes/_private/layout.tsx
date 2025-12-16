@@ -1,52 +1,9 @@
-import { createFileRoute, Outlet, redirect, useRouterState } from "@tanstack/react-router";
+import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 
-import { NavigationMenu } from "@/components";
-import type { AvailableRoutesToPath } from "@/config/router";
-import { useTranslation } from "@/i18n";
 import { getAuthStoreState } from "@/stores";
-import { Header } from "./-components";
 
 const PrivateLayout = () => {
-  const { t } = useTranslation();
-  const pathname = useRouterState({
-    select: (s) => {
-      return s.location.pathname;
-    },
-  });
-
-  const isProvidersRoute = pathname.startsWith("/providers");
-
-  const links: { path: AvailableRoutesToPath; label: string }[] = [
-    { path: "/", label: t("navigation.links.home") },
-    { path: "/dashboard", label: t("navigation.links.dashboard") },
-    { path: "/users", label: t("navigation.links.users") },
-  ];
-
-  if (isProvidersRoute) {
-    return <Outlet />;
-  }
-
-  return (
-    <div>
-      <Header />
-
-      <main className="flex flex-col gap-4 p-4">
-        <NavigationMenu.Root>
-          <NavigationMenu.List>
-            {links.map(({ label, path }) => {
-              return (
-                <NavigationMenu.Link key={path} to={path}>
-                  {label}
-                </NavigationMenu.Link>
-              );
-            })}
-          </NavigationMenu.List>
-        </NavigationMenu.Root>
-
-        <Outlet />
-      </main>
-    </div>
-  );
+  return <Outlet />;
 };
 
 export const Route = createFileRoute("/_private")({
