@@ -6,7 +6,6 @@ import type { GetProvidersResponse } from "@/types";
 
 export const getProviders = async (filters: ProviderFilters): Promise<Provider[]> => {
   const token = getAuthStoreState().token;
-  console.log(token);
 
   const { clinicId, gender, specialtyId } = filters;
 
