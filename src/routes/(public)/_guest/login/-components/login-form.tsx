@@ -38,8 +38,8 @@ export const LoginForm = () => {
 
   const onSubmit: SubmitHandler<LoginPayload> = (data) => {
     loginUser(data, {
-      onSuccess: async ({ data: { authToken } }) => {
-        setAuthStoreToken(authToken);
+      onSuccess: async ({ data }) => {
+        setAuthStoreToken(data.data.accessToken);
         await navigate({ to: search.redirect || "/home" });
       },
       onError: () => {
