@@ -1,24 +1,61 @@
 import { useMemo, useState } from "react";
 
-import { ErrorComponent } from "@/components";
-import { EmptyState } from "@/components";
+import { EmptyState, ErrorComponent } from "@/components";
 import { useProviders } from "@/hooks";
 import { useTranslation } from "@/i18n";
 import { initialProviderFilters, type ProviderFilters } from "@/services";
 import type { Provider } from "@/types";
+import { Route } from "../../page";
 import { SearchFilters } from "../-filters";
 import { ProviderCard, ProviderCardSkeleton, ProviderDetailsModal } from "..";
 
 export const ProvidersListing = () => {
-  const [filters, setFilters] = useState<ProviderFilters>(initialProviderFilters);
   const [selectedProviderId, setSelectedProviderId] = useState<Provider["id"] | null>(null);
-  const [searchTerm, setSearchTerm] = useState("");
   const { t } = useTranslation();
 
-  const { error, isLoading, providers, refetch, visibleProviders } = useProviders(
-    filters,
-    searchTerm,
-  );
+  const search = Route.useSearch();
+  const navigate = Route.useNavigate();
+
+  const filters: ProviderFilters = useMemo(() => {
+    return {
+      specialtyId: search.specialtyId,
+      clinicId: search.clinicId,
+      gender: search.gender,
+    };
+  }, [search.specialtyId, search.clinicId, search.gender]);
+
+  const searchTerm = search.q;
+
+  const providersQuery = useProviders(filters, searchTerm);
+  const optionsQuery = useProviders(initialProviderFilters, "");
+
+  const onSearchChange = (q: string) => {
+    navigate({
+      search: (prev) => {
+        return { ...prev, q, page: 1 };
+      },
+      replace: true,
+    });
+  };
+
+  const onFiltersChange = (next: ProviderFilters) => {
+    navigate({
+      search: (prev) => {
+        return {
+          ...prev,
+          specialtyId: next.specialtyId,
+          clinicId: next.clinicId,
+          gender: next.gender,
+          page: 1,
+        };
+      },
+      replace: true,
+    });
+  };
+
+  const { error, isLoading, refetch, visibleProviders } = providersQuery;
+
+  const optionProviders = optionsQuery.providers;
 
   const selectedProvider = useMemo(() => {
     return (
@@ -33,9 +70,9 @@ export const ProvidersListing = () => {
       <>
         <SearchFilters
           filters={filters}
-          onFiltersChange={setFilters}
-          onSearchChange={setSearchTerm}
-          providers={providers}
+          onFiltersChange={onFiltersChange}
+          onSearchChange={onSearchChange}
+          providers={optionProviders}
           resultsCount={undefined}
           searchTerm={searchTerm}
         />
@@ -57,9 +94,9 @@ export const ProvidersListing = () => {
     <>
       <SearchFilters
         filters={filters}
-        onFiltersChange={setFilters}
-        onSearchChange={setSearchTerm}
-        providers={providers}
+        onFiltersChange={onFiltersChange}
+        onSearchChange={onSearchChange}
+        providers={optionProviders}
         resultsCount={visibleProviders.length}
         searchTerm={searchTerm}
       />
