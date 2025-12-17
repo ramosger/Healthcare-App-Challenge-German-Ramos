@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 
 import { EmptyState, ErrorComponent } from "@/components";
-import { useProviders } from "@/hooks";
+import { useDebounce, useProviders } from "@/hooks";
 import { useTranslation } from "@/i18n";
 import { initialProviderFilters, type ProviderFilters } from "@/services";
 import type { Provider } from "@/types";
@@ -25,8 +25,9 @@ export const ProvidersListing = () => {
   }, [search.specialtyId, search.clinicId, search.gender]);
 
   const searchTerm = search.q;
+  const debouncedSearchTerm = useDebounce(searchTerm, 300);
 
-  const providersQuery = useProviders(filters, searchTerm);
+  const providersQuery = useProviders(filters, debouncedSearchTerm);
   const optionsQuery = useProviders(initialProviderFilters, "");
 
   const onSearchChange = (q: string) => {

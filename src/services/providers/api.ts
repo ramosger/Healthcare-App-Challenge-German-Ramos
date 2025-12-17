@@ -1,20 +1,21 @@
 import { privateApi } from "@/config/api";
 import type { ProviderFilters } from "@/services";
-import type { Provider } from "@/types";
 import type { GetProvidersResponse } from "@/types";
 
-export const getProviders = async (filters: ProviderFilters): Promise<Provider[]> => {
+export const getProviders = async (
+  filters: ProviderFilters,
+  page: number,
+): Promise<GetProvidersResponse> => {
   const { clinicId, gender, specialtyId } = filters;
 
   const params = {
     ...(specialtyId ? { "filter[specialty_id]": specialtyId } : {}),
     ...(clinicId ? { "filter[clinic_id]": clinicId } : {}),
     ...(gender ? { "filter[gender]": gender } : {}),
+    page,
   };
 
-  const { data } = await privateApi.get<GetProvidersResponse>("/providers", {
-    params,
-  });
+  const { data } = await privateApi.get<GetProvidersResponse>("/providers", { params });
 
-  return data.data;
+  return data;
 };

@@ -1,32 +1,39 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
+import type { InfiniteData } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
 import type { ProviderFilters } from "@/services";
 import { getProviders, getVisibleProviders } from "@/services";
-import type { Provider } from "@/types";
+import type { GetProvidersResponse, Provider } from "@/types";
 
 export const useProviders = (filters: ProviderFilters, searchTerm: string) => {
-  const [providers, setProviders] = useState<Provider[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const query = useInfiniteQuery<
+    GetProvidersResponse,
+    Error,
+    InfiniteData<GetProvidersResponse>,
+    ["providers", ProviderFilters],
+    number
+  >({
+    queryKey: ["providers", filters],
+    initialPageParam: 1,
+    queryFn: ({ pageParam }) => {
+      return getProviders(filters, pageParam);
+    },
+    getNextPageParam: (lastPage) => {
+      return lastPage.meta.currentPage < lastPage.meta.lastPage
+        ? lastPage.meta.currentPage + 1
+        : undefined;
+    },
+    staleTime: 30000,
+  });
 
-  const loadProviders = useCallback(async () => {
-    try {
-      setIsLoading(true);
-
-      const data = await getProviders(filters);
-
-      setProviders(data);
-      setError(null);
-    } catch (err) {
-      setError(`There was a problem loading providers. Please try again. - (${err})`);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [filters]);
-
-  useEffect(() => {
-    loadProviders();
-  }, [loadProviders]);
+  const providers = useMemo<Provider[]>(() => {
+    return (
+      query.data?.pages.flatMap((p) => {
+        return p.data;
+      }) ?? []
+    );
+  }, [query.data]);
 
   const visibleProviders = useMemo(() => {
     return getVisibleProviders(providers, searchTerm);
@@ -35,8 +42,11 @@ export const useProviders = (filters: ProviderFilters, searchTerm: string) => {
   return {
     providers,
     visibleProviders,
-    isLoading,
-    error,
-    refetch: loadProviders,
+    isLoading: query.isLoading,
+    error: query.error ? "There was a problem loading providers. Please try again." : null,
+    refetch: query.refetch,
+    loadMore: query.fetchNextPage,
+    isLoadingMore: query.isFetchingNextPage,
+    hasMore: query.hasNextPage,
   };
 };
