@@ -4,7 +4,7 @@ export type GetProvidersResponse = {
   data: Provider[];
   links: unknown;
   meta: {
-    currentPage: number;
-    lastPage: number;
+    current_page: number;
+    last_page: number;
   };
 };

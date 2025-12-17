@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { EmptyState, ErrorComponent } from "@/components";
 import { useDebounce, useProviders } from "@/hooks";
@@ -12,6 +12,8 @@ import { ProviderCard, ProviderCardSkeleton, ProviderDetailsModal } from "..";
 export const ProvidersListing = () => {
   const [selectedProviderId, setSelectedProviderId] = useState<Provider["id"] | null>(null);
   const { t } = useTranslation();
+
+  const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
   const search = Route.useSearch();
   const navigate = Route.useNavigate();
@@ -28,7 +30,10 @@ export const ProvidersListing = () => {
   const debouncedSearchTerm = useDebounce(searchTerm, 300);
 
   const providersQuery = useProviders(filters, debouncedSearchTerm);
+
   const optionsQuery = useProviders(initialProviderFilters, "");
+
+  const { hasMore, isLoadingMore, loadMore } = providersQuery;
 
   const onSearchChange = (q: string) => {
     navigate({
@@ -65,6 +70,35 @@ export const ProvidersListing = () => {
       }) ?? null
     );
   }, [visibleProviders, selectedProviderId]);
+
+  useEffect(() => {
+    const el = loadMoreRef.current;
+
+    if (!el) {
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      const first = entries[0];
+      if (!first?.isIntersecting) {
+        return;
+      }
+      if (isLoadingMore) {
+        return;
+      }
+      if (!hasMore) {
+        return;
+      }
+
+      loadMore();
+    });
+
+    observer.observe(el);
+
+    return () => {
+      return observer.disconnect();
+    };
+  }, [hasMore, isLoadingMore, loadMore, visibleProviders.length]);
 
   if (isLoading) {
     return (
@@ -129,6 +163,14 @@ export const ProvidersListing = () => {
           })}
         </div>
       )}
+
+      <div className="h-30 w-full" ref={loadMoreRef} />
+
+      {providersQuery.isLoadingMore ? (
+        <div className="px-6 py-6 text-center text-sm text-text-tertiary">
+          {t("provider.loadMore")}
+        </div>
+      ) : null}
 
       {selectedProvider ? (
         <ProviderDetailsModal

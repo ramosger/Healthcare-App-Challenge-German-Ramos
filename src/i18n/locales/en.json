@@ -140,6 +140,7 @@
     "viewOnMaps": "View on Google Maps",
     "noLanguage": "No language information available",
     "notFound": "No providers found matching your search.",
-    "adjustFilters": "Try adjusting your filters."
+    "adjustFilters": "Try adjusting your filters.",
+    "loadMore": "Loading more..."
   }
 }

@@ -20,8 +20,8 @@ export const useProviders = (filters: ProviderFilters, searchTerm: string) => {
       return getProviders(filters, pageParam);
     },
     getNextPageParam: (lastPage) => {
-      return lastPage.meta.currentPage < lastPage.meta.lastPage
-        ? lastPage.meta.currentPage + 1
+      return lastPage.meta.current_page < lastPage.meta.last_page
+        ? lastPage.meta.current_page + 1
         : undefined;
     },
     staleTime: 30000,
