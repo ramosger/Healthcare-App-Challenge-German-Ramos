@@ -39,7 +39,17 @@ export const LoginForm = () => {
     loginUser(data, {
       onSuccess: async ({ data }) => {
         setAuthStoreToken(data.data.accessToken);
-        await navigate({ to: "/providers", replace: true });
+        await navigate({
+          to: "/providers",
+          search: {
+            q: "",
+            specialtyId: null,
+            clinicId: null,
+            gender: null,
+            page: 1,
+          },
+          replace: true,
+        });
       },
       onError: () => {
         setError("password", {
