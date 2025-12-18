@@ -6,7 +6,7 @@ export type ProviderFilterOptions = {
 };
 
 export type ProviderFilters = {
-  specialtyId: string | null;
-  clinicId: string | null;
+  specialtyId: number | null;
+  clinicId: number | null;
   gender: string | null;
 };

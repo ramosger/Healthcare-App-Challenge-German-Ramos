@@ -18,13 +18,11 @@ export const ProvidersListing = () => {
   const search = Route.useSearch();
   const navigate = Route.useNavigate();
 
-  const filters: ProviderFilters = useMemo(() => {
-    return {
-      specialtyId: search.specialtyId ? String(search.specialtyId) : null,
-      clinicId: search.clinicId ? String(search.clinicId) : null,
-      gender: search.gender,
-    };
-  }, [search.specialtyId, search.clinicId, search.gender]);
+  const filters: ProviderFilters = {
+    specialtyId: search.specialtyId,
+    clinicId: search.clinicId,
+    gender: search.gender,
+  };
 
   const searchTerm = search.q;
   const debouncedSearchTerm = useDebounce(searchTerm, 300);
