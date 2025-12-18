@@ -170,7 +170,7 @@ export const ProvidersListing = () => {
 
       <div className="h-30 w-full" ref={loadMoreRef} />
 
-      {providersQuery.isLoadingMore ? (
+      {isLoadingMore ? (
         <div className="px-6 py-6 text-center text-sm text-text-tertiary">
           {t("provider.loadMore")}
         </div>
