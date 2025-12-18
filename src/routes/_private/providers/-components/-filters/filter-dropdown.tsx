@@ -38,7 +38,7 @@ export const FilterDropdown = ({ onChange, options, placeholder, value }: Filter
         >
           <div className="flex flex-1 items-center justify-start overflow-hidden">
             <div className="flex flex-1 items-center justify-between self-stretch px-3 py-1.5">
-              <span className="line-clamp-1 flex-1 justify-start text-sm leading-5 font-normal text-text-primary">
+              <span className="line-clamp-1 flex-1 justify-start text-sm leading-5 font-normal text-text-primary capitalize">
                 {displayText}
               </span>
             </div>
@@ -66,7 +66,7 @@ export const FilterDropdown = ({ onChange, options, placeholder, value }: Filter
           {options.map((option) => {
             return (
               <button
-                className="w-full cursor-pointer px-3 py-2 text-left text-sm hover:bg-gray-100"
+                className="w-full cursor-pointer px-3 py-2 text-left text-sm capitalize hover:bg-gray-100"
                 key={option.value}
                 onClick={() => {
                   return handleSelect(option);
