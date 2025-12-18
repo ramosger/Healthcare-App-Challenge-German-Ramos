@@ -36,6 +36,9 @@ export const ProfileMenu = ({ email, initials, name, onLogout }: ProfileMenuProp
   return (
     <div className="relative">
       <button
+        aria-expanded={isOpen}
+        aria-haspopup="menu"
+        aria-label="Open profile menu"
         className="relative size-8 cursor-pointer overflow-hidden rounded-full bg-background-brand-default font-light text-white lg:size-10"
         onClick={() => {
           setIsOpen((prev) => {
