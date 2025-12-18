@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { EmptyState, ErrorComponent } from "@/components";
 import { useDebounce, useProviders } from "@/hooks";
@@ -33,29 +33,35 @@ export const ProvidersListing = () => {
 
   const { hasMore, isLoadingMore, loadMore } = providersQuery;
 
-  const onSearchChange = (q: string) => {
-    navigate({
-      search: (prev) => {
-        return { ...prev, q, page: 1 };
-      },
-      replace: true,
-    });
-  };
+  const onSearchChange = useCallback(
+    (q: string) => {
+      navigate({
+        search: (prev) => {
+          return { ...prev, q, page: 1 };
+        },
+        replace: true,
+      });
+    },
+    [navigate],
+  );
 
-  const onFiltersChange = (next: ProviderFilters) => {
-    navigate({
-      search: (prev) => {
-        return {
-          ...prev,
-          specialtyId: next.specialtyId ? Number(next.specialtyId) : null,
-          clinicId: next.clinicId ? Number(next.clinicId) : null,
-          gender: next.gender,
-          page: 1,
-        };
-      },
-      replace: true,
-    });
-  };
+  const onFiltersChange = useCallback(
+    (next: ProviderFilters) => {
+      navigate({
+        search: (prev) => {
+          return {
+            ...prev,
+            specialtyId: next.specialtyId ? Number(next.specialtyId) : null,
+            clinicId: next.clinicId ? Number(next.clinicId) : null,
+            gender: next.gender,
+            page: 1,
+          };
+        },
+        replace: true,
+      });
+    },
+    [navigate],
+  );
 
   const { error, isLoading, refetch, visibleProviders } = providersQuery;
 
