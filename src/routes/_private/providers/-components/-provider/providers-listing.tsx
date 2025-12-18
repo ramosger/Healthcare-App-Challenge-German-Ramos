@@ -19,8 +19,8 @@ export const ProvidersListing = () => {
   const navigate = Route.useNavigate();
 
   const filters: ProviderFilters = {
-    specialtyId: search.specialtyId,
-    clinicId: search.clinicId,
+    specialtyId: search.specialtyId != null ? String(search.specialtyId) : null,
+    clinicId: search.clinicId != null ? String(search.clinicId) : null,
     gender: search.gender,
   };
 
