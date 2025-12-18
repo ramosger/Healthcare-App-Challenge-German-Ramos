@@ -20,8 +20,8 @@ export const ProvidersListing = () => {
 
   const filters: ProviderFilters = useMemo(() => {
     return {
-      specialtyId: search.specialtyId,
-      clinicId: search.clinicId,
+      specialtyId: search.specialtyId ? String(search.specialtyId) : null,
+      clinicId: search.clinicId ? String(search.clinicId) : null,
       gender: search.gender,
     };
   }, [search.specialtyId, search.clinicId, search.gender]);
@@ -49,8 +49,8 @@ export const ProvidersListing = () => {
       search: (prev) => {
         return {
           ...prev,
-          specialtyId: next.specialtyId,
-          clinicId: next.clinicId,
+          specialtyId: next.specialtyId ? Number(next.specialtyId) : null,
+          clinicId: next.clinicId ? Number(next.clinicId) : null,
           gender: next.gender,
           page: 1,
         };

@@ -1,7 +1,7 @@
 export type ProvidersSearch = {
   q: string;
-  specialtyId: string | null;
-  clinicId: string | null;
+  specialtyId: number | null;
+  clinicId: number | null;
   gender: string | null;
   page: number;
 };
@@ -43,6 +43,34 @@ export const parseNullableString = (v: unknown): string | null => {
   return raw;
 };
 
+export const parseNullableNumber = (v: unknown): number | null => {
+  if (v == null) {
+    return null;
+  }
+
+  if (typeof v === "number" && Number.isFinite(v)) {
+    return Math.floor(v);
+  }
+
+  if (typeof v !== "string") {
+    return null;
+  }
+
+  const raw = parseMaybeJsonString(v).trim();
+
+  if (!raw) {
+    return null;
+  }
+
+  const n = Number(raw);
+
+  if (!Number.isFinite(n) || n <= 0) {
+    return null;
+  }
+
+  return Math.floor(n);
+};
+
 export const parseString = (v: unknown): string => {
   if (typeof v !== "string") {
     return "";
@@ -70,8 +98,8 @@ export const parsePage = (v: unknown): number => {
 export const validateProvidersSearch = (search: Record<string, unknown>): ProvidersSearch => {
   return {
     q: parseString(search.q),
-    specialtyId: parseNullableString(search.specialtyId),
-    clinicId: parseNullableString(search.clinicId),
+    specialtyId: parseNullableNumber(search.specialtyId),
+    clinicId: parseNullableNumber(search.clinicId),
     gender: parseNullableString(search.gender),
     page: parsePage(search.page),
   };
