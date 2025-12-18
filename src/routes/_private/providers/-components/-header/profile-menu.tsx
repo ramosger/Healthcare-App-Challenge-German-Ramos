@@ -38,7 +38,9 @@ export const ProfileMenu = ({ email, initials, name, onLogout }: ProfileMenuProp
       <button
         className="relative size-8 cursor-pointer overflow-hidden rounded-full bg-background-brand-default font-light text-white lg:size-10"
         onClick={() => {
-          return setIsOpen(!isOpen);
+          setIsOpen((prev) => {
+            return !prev;
+          });
         }}
         type="button"
       >
