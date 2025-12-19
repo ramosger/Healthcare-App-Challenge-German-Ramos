@@ -1,20 +1,14 @@
 import { useMemo } from "react";
-import type { InfiniteData } from "@tanstack/react-query";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
+import { providersKeys } from "@/queries/providers.keys";
 import type { ProviderFilters } from "@/services";
 import { getProviders, getVisibleProviders } from "@/services";
-import type { GetProvidersResponse, Provider } from "@/types";
+import type { Provider } from "@/types";
 
 export const useProviders = (filters: ProviderFilters, searchTerm: string) => {
-  const query = useInfiniteQuery<
-    GetProvidersResponse,
-    Error,
-    InfiniteData<GetProvidersResponse>,
-    ["providers", ProviderFilters],
-    number
-  >({
-    queryKey: ["providers", filters],
+  const query = useInfiniteQuery({
+    queryKey: providersKeys.list(filters),
     initialPageParam: 1,
     queryFn: ({ pageParam }) => {
       return getProviders(filters, pageParam);
