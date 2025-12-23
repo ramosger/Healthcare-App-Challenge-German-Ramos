@@ -13,6 +13,7 @@ import { Route as PrivateLayoutRouteImport } from './routes/_private/layout'
 import { Route as PrivatePageRouteImport } from './routes/_private/page'
 import { Route as publicGuestLayoutRouteImport } from './routes/(public)/_guest/layout'
 import { Route as PrivateUsersPageRouteImport } from './routes/_private/users/page'
+import { Route as PrivateProvidersPageRouteImport } from './routes/_private/providers/page'
 import { Route as PrivateDashboardPageRouteImport } from './routes/_private/dashboard.page'
 import { Route as PrivateSplatPageRouteImport } from './routes/_private/$.page'
 import { Route as publicTermsPageRouteImport } from './routes/(public)/terms.page'
@@ -36,6 +37,11 @@ const publicGuestLayoutRoute = publicGuestLayoutRouteImport.update({
 const PrivateUsersPageRoute = PrivateUsersPageRouteImport.update({
   id: '/users/',
   path: '/users/',
+  getParentRoute: () => PrivateLayoutRoute,
+} as any)
+const PrivateProvidersPageRoute = PrivateProvidersPageRouteImport.update({
+  id: '/providers/',
+  path: '/providers/',
   getParentRoute: () => PrivateLayoutRoute,
 } as any)
 const PrivateDashboardPageRoute = PrivateDashboardPageRouteImport.update({
@@ -75,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/terms': typeof publicTermsPageRoute
   '/$': typeof PrivateSplatPageRoute
   '/dashboard': typeof PrivateDashboardPageRoute
+  '/providers': typeof PrivateProvidersPageRoute
   '/users': typeof PrivateUsersPageRoute
   '/login': typeof publicGuestLoginPageRoute
   '/register': typeof publicGuestRegisterPageRoute
@@ -85,6 +92,7 @@ export interface FileRoutesByTo {
   '/terms': typeof publicTermsPageRoute
   '/$': typeof PrivateSplatPageRoute
   '/dashboard': typeof PrivateDashboardPageRoute
+  '/providers': typeof PrivateProvidersPageRoute
   '/users': typeof PrivateUsersPageRoute
   '/login': typeof publicGuestLoginPageRoute
   '/register': typeof publicGuestRegisterPageRoute
@@ -98,6 +106,7 @@ export interface FileRoutesById {
   '/(public)/terms/': typeof publicTermsPageRoute
   '/_private/$/': typeof PrivateSplatPageRoute
   '/_private/dashboard/': typeof PrivateDashboardPageRoute
+  '/_private/providers/': typeof PrivateProvidersPageRoute
   '/_private/users/': typeof PrivateUsersPageRoute
   '/(public)/_guest/login/': typeof publicGuestLoginPageRoute
   '/(public)/_guest/register/': typeof publicGuestRegisterPageRoute
@@ -110,6 +119,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/$'
     | '/dashboard'
+    | '/providers'
     | '/users'
     | '/login'
     | '/register'
@@ -120,6 +130,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/$'
     | '/dashboard'
+    | '/providers'
     | '/users'
     | '/login'
     | '/register'
@@ -132,6 +143,7 @@ export interface FileRouteTypes {
     | '/(public)/terms/'
     | '/_private/$/'
     | '/_private/dashboard/'
+    | '/_private/providers/'
     | '/_private/users/'
     | '/(public)/_guest/login/'
     | '/(public)/_guest/register/'
@@ -172,6 +184,13 @@ declare module '@tanstack/react-router' {
       path: '/users'
       fullPath: '/users'
       preLoaderRoute: typeof PrivateUsersPageRouteImport
+      parentRoute: typeof PrivateLayoutRoute
+    }
+    '/_private/providers/': {
+      id: '/_private/providers/'
+      path: '/providers'
+      fullPath: '/providers'
+      preLoaderRoute: typeof PrivateProvidersPageRouteImport
       parentRoute: typeof PrivateLayoutRoute
     }
     '/_private/dashboard/': {
@@ -223,6 +242,7 @@ interface PrivateLayoutRouteChildren {
   PrivatePageRoute: typeof PrivatePageRoute
   PrivateSplatPageRoute: typeof PrivateSplatPageRoute
   PrivateDashboardPageRoute: typeof PrivateDashboardPageRoute
+  PrivateProvidersPageRoute: typeof PrivateProvidersPageRoute
   PrivateUsersPageRoute: typeof PrivateUsersPageRoute
 }
 
@@ -230,6 +250,7 @@ const PrivateLayoutRouteChildren: PrivateLayoutRouteChildren = {
   PrivatePageRoute: PrivatePageRoute,
   PrivateSplatPageRoute: PrivateSplatPageRoute,
   PrivateDashboardPageRoute: PrivateDashboardPageRoute,
+  PrivateProvidersPageRoute: PrivateProvidersPageRoute,
   PrivateUsersPageRoute: PrivateUsersPageRoute,
 }
 

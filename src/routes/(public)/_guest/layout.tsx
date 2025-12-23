@@ -16,7 +16,7 @@ export const Route = createFileRoute("/(public)/_guest")({
     const { token } = getAuthStoreState();
 
     if (token) {
-      throw redirect({ to: search.redirect || "/" });
+      throw redirect({ to: search.redirect || "/home" });
     }
   },
 });

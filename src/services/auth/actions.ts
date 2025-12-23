@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import type { UseMutationProps } from "@/services/types";
 import { mutations } from "./factories";
 
-export const useLoginMutation = (props?: UseMutationProps<typeof mutations.login>) => {
+export const useLogin = (props?: UseMutationProps<typeof mutations.login>) => {
   return useMutation({
     mutationFn: mutations.login,
     onError: () => {},
@@ -14,6 +14,14 @@ export const useLoginMutation = (props?: UseMutationProps<typeof mutations.login
 export const useRegister = (props?: UseMutationProps<typeof mutations.register>) => {
   return useMutation({
     mutationFn: mutations.register,
+    onError: () => {},
+    ...props,
+  });
+};
+
+export const useLogout = (props?: UseMutationProps<typeof mutations.logout>) => {
+  return useMutation({
+    mutationFn: mutations.logout,
     onError: () => {},
     ...props,
   });
