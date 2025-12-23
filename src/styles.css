@@ -1,17 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap");
 @import "tailwindcss";
 
 @plugin "tailwindcss-animate";
 
 body {
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
-    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+@layer base {
+  :root {
+    font-family: var(--font-sans);
+  }
 }
 
 :root {
@@ -44,7 +44,7 @@ code {
   --brand-200: #d1d7e6;
   --brand-300: #a9b4d0;
   --brand-400: #7b8db5;
-  --brand-500: #5a6f9d;
+  --brand-500: #5a5f70;
   --brand-600: #475882;
   --brand-700: #3a476a;
   --brand-800: #333e59;
@@ -182,17 +182,25 @@ code {
   --yellow-800: #854d0e;
   --yellow-900: #713f12;
   --yellow-950: #422006;
+
+  --light-white: #fafafb;
+  --silver-gray: #e7e8eb;
 }
 
 @theme inline {
   --radius: 0.5rem;
 
-  --color-background-brand-default: var(--brand-800);
+  --color-text-primary: var(--brand-950);
+  --color-text-secondary: var(--brand-800);
+  --color-text-tertiary: var(--brand-500);
+
+  --color-background-brand-default: var(--brand-900);
   --color-background-brand-hover: var(--slate-900);
   --color-background-brand-secondary: var(--brand-200);
   --color-background-brand-secondary-hover: var(--brand-300);
   --color-background-brand-tertiary: var(--brand-100);
   --color-background-brand-tertiary-hover: var(--brand-200);
+  --color-background-surface: var(--light-white);
 
   --color-background-danger-default: var(--red-500);
   --color-background-danger-hover: var(--red-600);
@@ -343,6 +351,7 @@ code {
   --color-text-danger-tertiary: var(--red-500);
 
   --color-text-default-default: var(--gray-900);
+  --color-text-default: var(--color-text-default-default);
   --color-text-default-secondary: var(--gray-500);
   --color-text-default-tertiary: var(--gray-400);
 
@@ -379,4 +388,10 @@ code {
   --color-text-warning-on-warning-tertiary: var(--orange-800);
   --color-text-warning-secondary: var(--orange-600);
   --color-text-warning-tertiary: var(--orange-500);
+
+  --background-image-auth: linear-gradient(180deg, var(--light-white), var(--silver-gray));
+
+  --color-border-default: var(--color-border-default-default);
+
+  --font-sans: "DM Sans", sans-serif;
 }

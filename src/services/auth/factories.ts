@@ -1,3 +1,3 @@
-import { login } from "./api";
+import { login, logout, register } from "./api";
 
-export const mutations = { login };
+export const mutations = { login, register, logout };

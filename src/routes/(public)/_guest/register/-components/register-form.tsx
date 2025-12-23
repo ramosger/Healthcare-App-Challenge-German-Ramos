@@ -1,0 +1,167 @@
+import { type SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Icon } from "@iconify/react";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { twMerge } from "tailwind-merge";
+
+import { Button, ErrorMessage, Input, Label, PasswordInput } from "@/components";
+import { Trans, useTranslation } from "@/i18n";
+import { getRegisterSchema, type RegisterPayload, useRegister } from "@/services";
+import { setLoggedUserStoreUser } from "@/stores";
+import { getInitials } from "@/utils";
+import { handleAxiosFieldErrors } from "@/utils";
+
+const baseInputClasses =
+  "h-11 rounded-md bg-background-default-default text-sm placeholder:text-text-default";
+
+const errorInputClasses =
+  "border-border-danger-tertiary text-icon-danger-default focus:border-border-danger-tertiary focus:ring-0 focus-visible:border-border-danger-tertiary focus-visible:ring-0";
+
+const normalInputClasses = "border-border-default text-text-default";
+
+export const RegisterForm = () => {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const { isPending: isRegisterPending, mutate: registerUser } = useRegister();
+
+  const {
+    formState: { errors },
+    handleSubmit,
+    register,
+    setError,
+  } = useForm<RegisterPayload>({
+    mode: "onSubmit",
+    reValidateMode: "onChange",
+    resolver: zodResolver(getRegisterSchema()),
+  });
+
+  const onSubmit: SubmitHandler<RegisterPayload> = (payload) => {
+    registerUser(payload, {
+      onSuccess: () => {
+        const email = payload.email.trim();
+        const name = payload.name.trim();
+        const initials = getInitials(name, email);
+
+        setLoggedUserStoreUser({ email, name, initials });
+
+        navigate({ to: "/register/success" });
+      },
+      onError: (error) => {
+        handleAxiosFieldErrors<RegisterPayload>(error, setError, t("register.signUpFailed"));
+      },
+    });
+  };
+
+  return (
+    <>
+      <div className="flex flex-col gap-2 pb-6">
+        <h1 className="text-3xl font-normal tracking-tight text-text-default">
+          {t("register.createAccount")}
+        </h1>
+
+        <p className="text-md font-normal text-text-default-secondary">{t("register.subtitle")}</p>
+      </div>
+
+      <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex flex-col gap-2">
+          <Label className="text-sm font-normal" htmlFor="name">
+            {t("form.name")}
+          </Label>
+
+          <Input
+            {...register("name")}
+            className={twMerge(
+              baseInputClasses,
+              errors.name ? errorInputClasses : normalInputClasses,
+            )}
+            placeholder={t("form.fullName")}
+          />
+
+          <ErrorMessage errorMessage={errors?.name?.message} />
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <Label className="text-sm font-normal" htmlFor="email">
+            {t("form.email")}
+          </Label>
+
+          <Input
+            {...register("email")}
+            className={twMerge(
+              baseInputClasses,
+              errors.email ? errorInputClasses : normalInputClasses,
+            )}
+            placeholder={t("form.email")}
+          />
+
+          <ErrorMessage errorMessage={errors?.email?.message} />
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <Label className="text-sm font-normal" htmlFor="password">
+            {t("form.password")}
+          </Label>
+
+          <PasswordInput
+            {...register("password")}
+            className={twMerge(
+              baseInputClasses,
+              errors.password ? errorInputClasses : normalInputClasses,
+            )}
+            placeholder={t("form.password")}
+          />
+
+          <ErrorMessage errorMessage={errors?.password?.message} />
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <Label className="text-sm font-normal" htmlFor="passwordConfirmation">
+            {t("form.passwordConfirmation")}
+          </Label>
+
+          <PasswordInput
+            {...register("passwordConfirmation")}
+            className={twMerge(
+              baseInputClasses,
+              errors.passwordConfirmation ? errorInputClasses : normalInputClasses,
+            )}
+            placeholder={t("form.passwordConfirmation")}
+          />
+
+          <ErrorMessage errorMessage={errors?.passwordConfirmation?.message} />
+        </div>
+
+        <Button
+          aria-busy={isRegisterPending}
+          className="text-md flex h-10 w-full items-center justify-center gap-2 rounded-md bg-background-brand-default px-3 py-2 font-medium text-text-neutral-on-neutral"
+          data-loading={isRegisterPending}
+          disabled={isRegisterPending}
+          type="submit"
+        >
+          {isRegisterPending ? (
+            <Icon
+              className="size-5 animate-spin text-text-default-secondary"
+              icon="eos-icons:loading"
+            />
+          ) : null}
+          {t("register.createAccount")}
+        </Button>
+
+        <div className="pt-2 text-center text-sm">
+          <Trans
+            components={{
+              Link: (
+                <Link
+                  className="font-medium text-text-default-secondary underline underline-offset-3 hover:opacity-80"
+                  to="/login"
+                />
+              ),
+            }}
+            i18nKey="register.withAccount"
+          />
+        </div>
+      </form>
+    </>
+  );
+};

@@ -20,25 +20,41 @@
   "form": {
     "email": "Email",
     "password": "Password",
+    "fullName": "Full name",
     "name": "Name",
-    "confirmPassword": "Confirm Password",
+    "passwordConfirmation": "Confirm Password",
     "passwordMustInclude": "Password must include",
     "errors": {
       "required": "{field} is required.",
       "invalidField": "Please enter a valid {field}.",
-      "minLength": "{field} should contain at least {length} characters.",
+      "minLength": "{field} must be at least {length} characters long",
       "containsNumber": "{field} must contain at least one number.",
-      "passwordMismatch": "Passwords don't match.",
-      "passwordTooWeak": "Password is too weak.",
+      "passwordMismatch": "Passwords do not match.",
       "containsLetter": "{field} must contain at least one letter."
+    },
+    "passwordErrors": {
+      "passwordTooWeak": "Password is too weak.",
+      "passwordConfirmationRequired": "Please confirm your password."
     }
   },
+  "register": {
+    "createAccount": "Create account",
+    "subtitle": "Enter your information to create a new account",
+    "withAccount": "<Link>Already have an account? Login</Link>",
+    "signUpFailed": "We couldn’t complete your registration.",
+    "success": "Your account was successfully created.",
+    "allSet": "You're all set!",
+    "redirectToLogin": "Go to login"
+  },
   "login": {
+    "title": "Welcome back",
+    "subtitle": "Enter your email and password to access your account",
     "forgotYourPassword": "Forgot your password?",
-    "login": "Login",
-    "noAccount": "Don't have an account? <Link>Sign up</Link>",
+    "login": "Log in",
+    "noAccount": "<Link>Don't have an account? Sign up</Link>",
     "error": "Not able to log in",
-    "success": "Logged in successfully"
+    "success": "Logged in successfully",
+    "invalidCredentials": "Email or password field is not valid"
   },
   "logout": {
     "logOut": "Log out",
@@ -102,5 +118,29 @@
       "dashboard": "Dashboard",
       "users": "Users"
     }
+  },
+  "header": {
+    "title": "HealthConnect",
+    "subtitle": "Find your healthcare provider"
+  },
+  "searchFilters": {
+    "title": "Healthcare Providers",
+    "subtitle": "Find and connect with healthcare professionals in your area",
+    "found": "found"
+  },
+  "errorComponent": {
+    "tryAgain": "Try again"
+  },
+  "provider": {
+    "details": {
+      "title": "View details",
+      "subtitle": "Overview"
+    },
+    "locations": "Locations",
+    "viewOnMaps": "View on Google Maps",
+    "noLanguage": "No language information available",
+    "notFound": "No providers found matching your search.",
+    "adjustFilters": "Try adjusting your filters.",
+    "loadMore": "Loading more..."
   }
 }
