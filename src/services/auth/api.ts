@@ -1,4 +1,4 @@
-import { publicApi } from "@/config/api";
+import { privateApi, publicApi } from "@/config/api";
 import type { LoginPayload, LoginResponse, RegisterPayload } from "./types";
 
 export const login = ({ email, password }: LoginPayload) => {
@@ -12,4 +12,8 @@ export const register = ({ email, name, password, passwordConfirmation }: Regist
     password,
     password_confirmation: passwordConfirmation,
   });
+};
+
+export const logout = () => {
+  return privateApi.post<void>("/auth/logout");
 };

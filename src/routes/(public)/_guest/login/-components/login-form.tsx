@@ -1,13 +1,15 @@
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Icon } from "@iconify/react";
-import { Link, useNavigate, useSearch } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { twMerge } from "tailwind-merge";
 
 import { Button, ErrorMessage, Input, Label, PasswordInput } from "@/components";
 import { Trans, useTranslation } from "@/i18n";
 import { getLoginSchema, type LoginPayload, useLogin } from "@/services";
 import { setAuthStoreToken } from "@/stores";
+import { getLoggedUserStoreUser, setLoggedUserStoreUser } from "@/stores";
+import { getInitials } from "@/utils";
 
 const baseInputClasses =
   "h-11 rounded-md bg-background-default-default text-sm placeholder:text-text-default";
@@ -22,7 +24,6 @@ export const LoginForm = () => {
 
   const { isPending: isLoginPending, mutate: loginUser } = useLogin();
 
-  const search = useSearch({ from: "/(public)/_guest/login/" });
   const navigate = useNavigate();
 
   const {
@@ -36,11 +37,31 @@ export const LoginForm = () => {
     resolver: zodResolver(getLoginSchema()),
   });
 
-  const onSubmit: SubmitHandler<LoginPayload> = (data) => {
-    loginUser(data, {
-      onSuccess: async ({ data: { authToken } }) => {
-        setAuthStoreToken(authToken);
-        await navigate({ to: search.redirect || "/home" });
+  const onSubmit: SubmitHandler<LoginPayload> = (payload) => {
+    loginUser(payload, {
+      onSuccess: async ({ data }) => {
+        const email = payload.email.trim();
+
+        const existingUser = getLoggedUserStoreUser();
+        const name =
+          existingUser?.email?.toLowerCase() === email.toLowerCase() ? existingUser.name : "";
+
+        const initials = getInitials(name, email);
+
+        setAuthStoreToken(data.data.accessToken);
+        setLoggedUserStoreUser({ email, name, initials });
+
+        await navigate({
+          to: "/providers",
+          search: {
+            q: "",
+            specialtyId: null,
+            clinicId: null,
+            gender: null,
+            page: 1,
+          },
+          replace: true,
+        });
       },
       onError: () => {
         setError("password", {

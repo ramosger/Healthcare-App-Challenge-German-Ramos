@@ -33,7 +33,11 @@ export const getLoginSchema = () => {
 };
 
 export const loginResponseSchema = z.object({
-  authToken: z.string(),
+  data: z.object({
+    accessToken: z.string(),
+    tokenType: z.string(),
+    expiresIn: z.number(),
+  }),
 });
 
 export const getRegisterSchema = () => {

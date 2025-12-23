@@ -18,3 +18,11 @@ export const useRegister = (props?: UseMutationProps<typeof mutations.register>)
     ...props,
   });
 };
+
+export const useLogout = (props?: UseMutationProps<typeof mutations.logout>) => {
+  return useMutation({
+    mutationFn: mutations.logout,
+    onError: () => {},
+    ...props,
+  });
+};

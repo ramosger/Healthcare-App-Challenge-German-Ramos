@@ -118,5 +118,29 @@
       "dashboard": "Dashboard",
       "users": "Users"
     }
+  },
+  "header": {
+    "title": "HealthConnect",
+    "subtitle": "Find your healthcare provider"
+  },
+  "searchFilters": {
+    "title": "Healthcare Providers",
+    "subtitle": "Find and connect with healthcare professionals in your area",
+    "found": "found"
+  },
+  "errorComponent": {
+    "tryAgain": "Try again"
+  },
+  "provider": {
+    "details": {
+      "title": "View details",
+      "subtitle": "Overview"
+    },
+    "locations": "Locations",
+    "viewOnMaps": "View on Google Maps",
+    "noLanguage": "No language information available",
+    "notFound": "No providers found matching your search.",
+    "adjustFilters": "Try adjusting your filters.",
+    "loadMore": "Loading more..."
   }
 }

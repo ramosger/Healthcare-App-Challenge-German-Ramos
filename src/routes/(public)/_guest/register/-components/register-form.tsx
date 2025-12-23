@@ -7,6 +7,8 @@ import { twMerge } from "tailwind-merge";
 import { Button, ErrorMessage, Input, Label, PasswordInput } from "@/components";
 import { Trans, useTranslation } from "@/i18n";
 import { getRegisterSchema, type RegisterPayload, useRegister } from "@/services";
+import { setLoggedUserStoreUser } from "@/stores";
+import { getInitials } from "@/utils";
 import { handleAxiosFieldErrors } from "@/utils";
 
 const baseInputClasses =
@@ -34,9 +36,15 @@ export const RegisterForm = () => {
     resolver: zodResolver(getRegisterSchema()),
   });
 
-  const onSubmit: SubmitHandler<RegisterPayload> = (data) => {
-    registerUser(data, {
+  const onSubmit: SubmitHandler<RegisterPayload> = (payload) => {
+    registerUser(payload, {
       onSuccess: () => {
+        const email = payload.email.trim();
+        const name = payload.name.trim();
+        const initials = getInitials(name, email);
+
+        setLoggedUserStoreUser({ email, name, initials });
+
         navigate({ to: "/register/success" });
       },
       onError: (error) => {
